@@ -1,0 +1,44 @@
+* {
+  font-family: boxcutter;
+  font-size: 50px;
+}
+
+window#waybar {
+  background-color: transparent;
+}
+
+#cpu,
+#temperature,
+#custom-gpu-usage,
+#clock {
+  margin-right: 25px;
+}
+
+#wireplumber,
+#network,
+#custom-media {
+  margin-left: 25px;
+}
+
+#workspaces {
+  background-color: transparent;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+#workspaces button {
+  color: white;
+  opacity: 0.5;
+  transition: 0.2s;
+  outline: none;
+  border: none;
+}
+
+#workspaces button.active {
+  opacity: 1;
+}
+
+#workspaces button:hover {
+  color: red;
+  opacity: 1;
+}

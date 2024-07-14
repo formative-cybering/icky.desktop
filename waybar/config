@@ -1,0 +1,68 @@
+{
+  "layer": "top",
+  "position": "bottom",
+  "spacing": 0,
+  "margin-bottom": 0,
+  "margin-top": -20,
+  "modules-left": [
+    "wireplumber",
+    "custom/media"
+  ],
+  "modules-center": [
+    "hyprland/workspaces"
+  ],
+  "modules-right": [
+    "temperature",
+    "cpu",
+    "custom/gpu-usage",
+    "clock"
+  ],
+  "exclusive": false,
+  "mode": "dock",
+  "wlr/workspaces": {
+    "format": "{icon}",
+    "on-click": "activate",
+    "sort-by-number": true
+  },
+  "cpu": {
+    "interval": 5,
+    "format": "CPU {usage:2}",
+    "tooltip": false
+  },
+  "temperature": {
+    "format": "{temperatureC} C",
+    "tooltip": false
+  },
+  "wireplumber": {
+    "format": "{volume}",
+    "format-muted": "",
+    "on-click": "helvum",
+    "max-volume": 100,
+    "scroll-step": 2,
+    "tooltip": false
+  },
+  "custom/gpu-usage": {
+    "exec": "nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits",
+    "format": "GPU {}",
+    "return-type": "",
+    "interval": 5,
+    "tooltip": false
+  },
+  "custom/media": {
+    "format": "{icon}{}",
+    "return-type": "json",
+    "format-icons": {
+      "Playing": "X ",
+      "Paused": "– "
+    },
+    "tooltip": false,
+    "max-length": 70,
+    "exec": "playerctl -a metadata --format '{\"text\": \"{{artist}} - {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
+    "on-click": "playerctl play-pause"
+  },
+  "clock": {
+    "interval": 60,
+    "format": "{:%H:%M}",
+    "max-length": 25
+  }
+}

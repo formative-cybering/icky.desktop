@@ -1,0 +1,12 @@
+{
+  "ui_font_size": 28,
+  "buffer_font_size": 24,
+  "theme": {
+    "mode": "system",
+    "light": "Ayu Light",
+    "dark": "macOS Classic Light"
+  },
+  "file_types": {
+    "Haskell": ["tidal"]
+  }
+}
