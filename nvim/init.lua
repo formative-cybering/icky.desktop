@@ -1,5 +1,6 @@
 vim.keymap.set({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
-vim.keymap.set({ "i", "x", "n", "s" }, "<C-e>", "mx <bar> vip <bar> :w !sh /media/x/documents/tidal/wez_send.sh<CR><bar>`x", { desc = "Tidal Wave" })
+vim.keymap.set({ "i", "x", "n", "s" }, "<C-e>", "<C-[>mz<bar>vip<bar>:w !sh /media/x/documents/tidal/wez_send.sh<CR>`z", { desc = "Tidal wave", silent = true, noremap = true })
+vim.keymap.set({ "x", "n", "s" }, "<C-a>", ":Files<CR>", { desc = "Open files" })
 
 vim.opt.nu = true
 vim.opt.relativenumber = true
@@ -34,6 +35,12 @@ vim.cmd.colorscheme "oxocarbon"
 
 vim.opt.guicursor = 'n-v-c-sm-i-ci-ve:block,r-cr-o:hor20,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,i-ci-ve:ver25'
 
+vim.filetype.add({
+ filename = {
+   ['.tidal'] = 'haskell',
+ },
+})
+
 local ensure_packer = function()
   local fn = vim.fn
   local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
@@ -50,8 +57,11 @@ local packer_bootstrap = ensure_packer()
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
   -- My plugins here
-  use {'nyoom-engineering/oxocarbon.nvim'}
-
+  use 'nyoom-engineering/oxocarbon.nvim'
+  use {
+    'junegunn/fzf.vim',
+    requires = { 'junegunn/fzf', run = ':call fzf#install()' }
+  }
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if packer_bootstrap then
