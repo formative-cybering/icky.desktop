@@ -7,7 +7,7 @@ local config = wezterm.config_builder()
 
 config.front_end = "WebGpu"
 config.enable_wayland = true
-config.font_size = 18
+config.font_size = 16
 
 config.color_scheme = 'Oxocarbon Dark (Gogh)'
 
