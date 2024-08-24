@@ -1,1 +1,0 @@
-# MEIN DOTTIES
