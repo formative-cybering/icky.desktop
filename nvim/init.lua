@@ -1,6 +1,6 @@
 vim.keymap.set({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
 vim.keymap.set({ "x", "n", "s" }, "<C-e>", "<C-[>mz<bar>vip<bar>:w !sh /media/x/documents/tidal/wez_send.sh<CR>`z", { desc = "Tidal wave", silent = true, noremap = true })
-vim.keymap.set({ "i" }, "<C-e>", "<C-[>mz<bar>vip<bar>:w !sh /media/x/documents/tidal/wez_send.sh<CR>`zi", { desc = "Tidal wave", silent = true, noremap = true })
+vim.keymap.set({ "i" }, "<C-e>", "<C-[>mz<bar>vip<bar>:w !sh /media/x/documents/tidal/wez_send.sh<CR>`z i", { desc = "Tidal wave", silent = true, noremap = true })
 vim.keymap.set({ "x", "n", "s" }, "<C-r>", ":Files<CR>", { desc = "Open files" })
 
 vim.opt.nu = true
