@@ -92,7 +92,7 @@ return require("packer").startup(function(use)
 				formatters_by_ft = {
 					lua = { "stylua" },
 					go = { "gofmt" },
-					haskell = { "hindent" },
+					haskell = { "ormolu" },
 					javascript = { "deno_fmt" },
 				},
 				format_on_save = {
