@@ -2,16 +2,22 @@ vim.keymap.set({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Sav
 vim.keymap.set(
 	{ "x", "n", "s" },
 	"<C-e>",
-	"<C-[>mz<bar>vip<bar>:w !sh /media/x/documents/tidal/wez_send.sh<CR>`z",
+	"<esc>mz<bar>vip<bar>:w !sh /media/x/documents/tidal/wez_send.sh<CR>`z",
 	{ desc = "Tidal wave", silent = true, noremap = true }
 )
 vim.keymap.set(
 	{ "i" },
 	"<C-e>",
-	"<C-[>mz<bar>vip<bar>:w !sh /media/x/documents/tidal/wez_send.sh<CR>`z i",
+	"<esc>mz<bar>vip<bar>:w !sh /media/x/documents/tidal/wez_send.sh<CR>`zli",
 	{ desc = "Tidal wave", silent = true, noremap = true }
 )
-vim.keymap.set({ "x", "n", "s" }, "<C-r>", ":Files<CR>", { desc = "Open files" })
+-- vim.keymap.set({ "x", "n", "s" }, "<C-r>", ":Files<CR>", { desc = "Open files" })
+vim.keymap.set(
+	{ "i", "x", "n", "s" },
+	"<C-r>",
+	'<esc>mz<bar>f"<bar>va"<bar>:w !sh /media/x/documents/tidal/tactus.sh<CR>',
+	{ desc = "Tidal Info" }
+)
 
 vim.opt.nu = true
 vim.opt.relativenumber = true
@@ -81,6 +87,8 @@ return require("packer").startup(function(use)
 	-- My plugins here
 	use("nyoom-engineering/oxocarbon.nvim")
 	use("tpope/vim-fugitive")
+	use("tpope/vim-commentary")
+	use("andweeb/presence.nvim")
 	use({
 		"junegunn/fzf.vim",
 		requires = { "junegunn/fzf", run = ":call fzf#install()" },

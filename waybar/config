@@ -61,6 +61,7 @@
     "on-click": "playerctl play-pause"
   },
   "clock": {
+    "timezone": "Australia/Sydney",
     "interval": 60,
     "format": "{:%H:%M}",
     "max-length": 25
