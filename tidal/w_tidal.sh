@@ -6,14 +6,14 @@ tmp="/tmp/WEZ_TIDAL"
 
 wezterm cli spawn -- sclang
 
-WEZ_TIDAL=$(wezterm cli spawn -- ghci -ghci-script /media/x/documents/tidal/bootTidal.hs)
+WEZ_TIDAL=$(wezterm cli spawn -- ghci -ghci-script ~/.config/tidal/bootTidal.hs)
 
 echo $WEZ_TIDAL > $tmp
 
 wezterm cli activate-tab --tab-index 0
 
-wezterm cli split-pane --cells 10 -- cava
+# wezterm cli split-pane --cells 10 -- cava
 
-cd /media/x/documents/tidal
+cd ~/bin
 
 nvim .

@@ -97,7 +97,7 @@ let p = streamReplace tidal
     volt volt = n volt # s "voltage"
     g gate = n gate # s "gate" # legato 0.1 # amp 0.4
     clock = rate "[1 0]*2" # s "voltage"
-    ar w x = attack w # decay x # s "ar"
+    ad w x = attack w # decay x # s "ar"
     adsr w x y z = attack w # decay x # sustain y # release z # s "ar"
     sawt x = rate x # s "saw"
     lfo x = rate x # s "lfo"
@@ -114,7 +114,23 @@ let p = streamReplace tidal
     j7 x = jumpMod 7 x
     j8 x = jumpMod 8 x
     b b = cps (270 / 60 / b)
-    ff nn = n nn # s "vrm" |- n 60
+    arrange :: [(Time, Pattern a)] -> Pattern a
+    arrange secs = _slow total $ timeCat fastened
+      where total = sum $ fst <$> secs
+            fastened = (\(cyc,sec) -> (cyc,_fast cyc $ sec)) <$> secs
+    arrange' :: [(Time, [Pattern a])] -> Pattern a
+    arrange' secs = _slow total $ timeCat fastened
+      where total = sum $ fst <$> secs
+            fastened = (\(cyc,sec) -> (cyc,_fast cyc $ stack sec)) <$> secs
+    vrm y z = n y # s "vrm" # midichan z
+    vm z = vrm (-24) z # nudge 0.046 # amp 1    
+    timeLoop' n o f = timeLoop n $ (o <~) f
+    timeLoop'' n o f = (o ~>) $ timeLoop n $ (o <~) f
+    tl' = timeLoop'
+    tl'' = timeLoop''
+    ol z = n z # s "o" # v 3 # pan 1
+    ar = arrange
+    ar' = arrange'
     drum :: Pattern String -> ControlPattern
     drum = n . (subtract 24 . drumN <$>)
     drumN :: Num a => String -> a
@@ -187,4 +203,9 @@ let setI = streamSetI tidal
 :}
 
 :set prompt "tidal> "
-:set prompt-cont ""
+:set promlet edo divisions notes = stack [
+    note (floor <$> scaledNote),
+    midibend (segment 128 $ range 0 16383 $ 
+      (scaledNote - (floor <$> scaledNote)) * 8192)
+    ]
+    where scaledNote = (12 * notes) / (fromIntegral divisions)pt-cont ""
