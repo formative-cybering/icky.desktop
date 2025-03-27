@@ -6,14 +6,14 @@
   "assistant": {
     "default_model": {
       "provider": "zed.dev",
-      "model": "claude-3-5-sonnet-latest"
+      "model": "claude-3-7-sonnet-latest"
     },
     "version": "2"
   },
   "tab_size": 2,
   "ui_font_size": 19,
   "buffer_font_size": 19,
-  "theme": "Mellow",
+  "theme": "Ayu Dark",
   "file_types": {
     "Haskell": ["tidal"]
   }

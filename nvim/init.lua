@@ -19,6 +19,7 @@ vim.keymap.set(
 	{ desc = "Tidal Info" }
 )
 
+vim.opt.clipboard = "unnamedplus"
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
