@@ -1,19 +1,20 @@
 {
-  "show_inline_completions": false,
+  "show_edit_predictions": false,
   "features": {
-    "inline_completion_provider": "supermaven"
+    "edit_prediction_provider": "supermaven"
   },
-  "assistant": {
+  "agent": {
+    "always_allow_tool_actions": true,
     "default_model": {
       "provider": "zed.dev",
-      "model": "claude-3-7-sonnet-latest"
+      "model": "claude-sonnet-4"
     },
     "version": "2"
   },
   "tab_size": 2,
-  "ui_font_size": 19,
-  "buffer_font_size": 19,
-  "theme": "One Light",
+  "ui_font_size": 22,
+  "buffer_font_size": 22,
+  "theme": "Gruvbox Dark Hard",
   "file_types": {
     "Haskell": ["tidal"]
   }
