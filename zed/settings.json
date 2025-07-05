@@ -1,20 +1,21 @@
 {
-  "show_edit_predictions": false,
   "features": {
-    "edit_prediction_provider": "supermaven"
+    "edit_prediction_provider": "copilot"
   },
   "agent": {
     "always_allow_tool_actions": true,
     "default_model": {
       "provider": "zed.dev",
       "model": "claude-sonnet-4"
-    },
-    "version": "2"
+    }
   },
   "tab_size": 2,
-  "ui_font_size": 22,
+  "ui_font_size": 20,
   "buffer_font_size": 22,
-  "theme": "Gruvbox Dark Hard",
+  "agent_font_size": 22,
+  "ui_font_family": "Programma",
+  "buffer_font_family": "Programma",
+  "theme": "macOS Classic Dark2",
   "file_types": {
     "Haskell": ["tidal"]
   }
