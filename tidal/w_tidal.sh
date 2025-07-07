@@ -7,7 +7,6 @@ tmp="/tmp/WEZ_TIDAL"
 wezterm cli spawn -- sclang
 
 WEZ_TIDAL=$(wezterm cli spawn -- ghci -ghci-script ~/.config/tidal/bootTidal.hs)
-# WEZ_TIDAL=$(wezterm cli spawn -- ghci -ghci-script ~/Code/tidal/bootTidal.hs)
 
 echo $WEZ_TIDAL > $tmp
 
