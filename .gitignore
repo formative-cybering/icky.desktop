@@ -8,8 +8,6 @@ cava/shaders/
 !hyper/**
 !dunst/
 !dunst/**
-!halloy/
-!halloy/**
 !hypr/
 !hypr/**
 !nvim/
@@ -17,6 +15,7 @@ cava/shaders/
 nvim/plugin/*_compiled.lua
 !systemd/
 !systemd/**
+systemd/user/timers.target.wants
 !tidal/
 !tidal/**
 !tofi/
@@ -28,4 +27,3 @@ nvim/plugin/*_compiled.lua
 !zed/
 !zed/**
 zed/.*
-
