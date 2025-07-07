@@ -1,19 +1,19 @@
 snippet poly
-  "{${1}}%${2}"
+  {${1}}%${2}
 
 snippet lxr
-  lxr "${1:poly}" # amp 1
+  lxr "${1|poly|}" # amp 1
 
 snippet rx5
-  rxn "${1:poly}" # midichan ${2} # amp 1
+  rxn "${1|poly|}" # midichan ${2} # amp 1
 
 snippet k1
-  k1 "${1:poly}" # midichan ${2} # amp 1
+  k1 "${1|poly|}" # midichan ${2} # amp 1
 
 snippet osc
   stack [
-    g "${1:poly}" # l ${2} # x ${3},
-    o "${4:poly}" # x ${5}
+    g "${1|poly|}" # l ${2} # x ${3},
+    o "${4|poly|}" # x ${5}
   ]
 
 snippet sec
