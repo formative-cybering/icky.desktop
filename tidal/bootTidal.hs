@@ -97,13 +97,13 @@ let inst = pS "inst"
         notePos = notes * pure (12/divisions)
         midiNote = floor <$> notePos
         bendAmt = (notePos - (fromIntegral <$> midiNote)) * pure (16383/15)
-      in stack 
+      in stack
         [ n (fromIntegral <$> midiNote),
           midibend (min 16383 <$> bendAmt)
         ]
 
     vrm y z = n y # s "vrm" # midichan z
-    vm z = vrm (-24) z # nudge 0.046 # amp 1    
+    vm z = vrm (-24) z # nudge 0.046 # amp 1
     timeLoop' n o f = timeLoop n $ (o <~) f
     timeLoop'' n o f = (o ~>) $ timeLoop n $ (o <~) f
     tl' = timeLoop'
@@ -133,7 +133,7 @@ let inst = pS "inst"
 
     lxrdChannel :: Num a => String -> a
     lxrdChannel "k" = 9
-    lxrdChannel "s" = 12  
+    lxrdChannel "s" = 12
     lxrdChannel "c" = 13
     lxrdChannel "o" = 15
     lxrdChannel "h" = 14
@@ -191,4 +191,3 @@ enableLink
 :set -fwarn-orphans
 :set prompt "tidal> "
 :set prompt-cont ""
-

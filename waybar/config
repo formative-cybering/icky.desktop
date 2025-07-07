@@ -6,7 +6,6 @@
   "margin-top": -20,
   "modules-left": [
     "wireplumber",
-    "custom/media"
   ],
   "modules-center": [
     "hyprland/workspaces"
@@ -47,18 +46,6 @@
     "return-type": "",
     "interval": 5,
     "tooltip": false
-  },
-  "custom/media": {
-    "format": "{icon}{}",
-    "return-type": "json",
-    "format-icons": {
-      "Playing": "X ",
-      "Paused": "– "
-    },
-    "tooltip": false,
-    "max-length": 70,
-    "exec": "playerctl -a metadata --format '{\"text\": \"{{artist}} - {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
-    "on-click": "playerctl play-pause"
   },
   "clock": {
     "timezone": "Australia/Sydney",
