@@ -1,7 +1,0 @@
-[
-  {
-    "label": "Tidal Selection",
-    "command": "echo '$ZED_SELECTED_TEXT' | wezterm cli send-text --no-paste --pane-id 3",
-    "reveal": "never"
-  }
-]
