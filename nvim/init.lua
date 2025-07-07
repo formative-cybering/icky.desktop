@@ -1,3 +1,5 @@
+---@diagnostic disable: undefined-global
+
 vim.keymap.set({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
 vim.keymap.set(
   { "x", "n", "s" },
