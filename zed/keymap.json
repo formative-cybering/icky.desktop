@@ -1,0 +1,373 @@
+[
+  // ===============================
+  // GLOBAL & GENERAL CONTEXTS
+  // ===============================
+  {
+    // Applies globally (Editor or Workspace)
+    // "context": "Editor || Workspace",
+    "bindings": {
+      "ctrl-right": "pane::GoForward",
+      "shift-escape": "workspace::Save",
+
+      "cmd-r": "project_panel::ToggleFocus",
+      "cmd-shift-r": "workspace::ToggleRightDock",
+
+      "cmd-j": "terminal_panel::ToggleFocus",
+      "cmd-shift-j": "workspace::ToggleBottomDock",
+
+      "cmd-i": "agent::ToggleFocus",
+      "cmd-shift-i": "workspace::ToggleLeftDock",
+      "cmd-shift-n": "workspace::ToggleLeftDock",
+
+      "cmd-g": "git_panel::ToggleFocus",
+      "cmd-shift-g": "workspace::ToggleRightDock",
+
+      "cmd-e": "project_symbols::Toggle",
+      "cmd-t": "file_finder::Toggle",
+      "cmd-p": "command_palette::Toggle",
+
+      "cmd-=": ["zed::IncreaseBufferFontSize", { "persist": true }],
+      "cmd-+": ["zed::IncreaseBufferFontSize", { "persist": true }],
+      "cmd--": ["zed::DecreaseBufferFontSize", { "persist": true }],
+      "cmd-0": ["zed::ResetBufferFontSize", { "persist": true }]
+    }
+  },
+
+  // ===============================
+  // PANEL-SPECIFIC CONTEXTS
+  // ===============================
+  {
+    // Project Panel navigation
+    "context": "ProjectPanel",
+    "bindings": {
+      "cmd-r": "workspace::ToggleRightDock",
+      "escape": "workspace::ToggleRightDock"
+    }
+  },
+  {
+    // Git Panel navigation
+    "context": "GitPanel",
+    "bindings": {
+      "cmd-g": ["workspace::SendKeystrokes", "cmd-r escape"],
+      "escape": ["workspace::SendKeystrokes", "cmd-r escape"]
+    }
+  },
+  {
+    // Agent Panel controls
+    "context": "AgentPanel",
+    "bindings": {
+      "ctrl-i": "agent::ToggleProfileSelector"
+    }
+  },
+  {
+    // Terminal Panel controls
+    "context": "Terminal",
+    "bindings": {
+      "escape": "terminal_panel::ToggleFocus"
+    }
+  },
+  {
+    // Outline Panel navigation (when not editing)
+    "context": "OutlinePanel && not_editing",
+    "bindings": {
+      "enter": "outline_panel::OpenSelectedEntry",
+      "escape": "outline_panel::ToggleFocus"
+    }
+  },
+
+  // ===============================
+  // WORKSPACE & EDITOR CONTEXTS
+  // ===============================
+  {
+    // Workspace-wide (except Terminal)
+    "context": "Workspace && !Terminal",
+    "bindings": {
+      "cmd-shift-n": "workspace::NewFile"
+    }
+  },
+  {
+    // Editor-specific navigation
+    "context": "Editor",
+    "bindings": {
+      "cmd-shift-left": [
+        "editor::SelectToBeginningOfLine",
+        { "stop_at_soft_wraps": false, "stop_at_indent": true }
+      ],
+      "cmd-shift-right": ["editor::SelectToEndOfLine", { "stop_at_soft_wraps": false }]
+    }
+  },
+
+  // ===============================
+  // VIMCONTROL & VIM MODES
+  // ===============================
+  {
+    // VimControl (not in menu)
+    "context": "VimControl && !menu",
+    "bindings": {
+      "backspace": "workspace::Save",
+      "=": null, // disable so i can use it for chording
+
+      // Chording and custom navigation
+      "m": ["workspace::SendKeystrokes", ": / ^ e x p o r t enter alt-m"],
+      "alt-m": "editor::ScrollCursorCenter",
+      "shift-m": ["workspace::SendKeystrokes", "escape t ( alt-m"],
+
+      // Outline toggles
+      "cmd-m": "outline::Toggle",
+      "alt-n": "outline::Toggle",
+      "alt-t": "outline::Toggle",
+
+      // Marks and jumps
+      "space": ["vim::PushJump", { "line": false }],
+      "shift-space": "vim::PushMark",
+
+      // Comments and newlines
+      "enter": ["editor::ToggleComments", { "advance_downwards": false }],
+      "ctrl-enter": "editor::Newline",
+      "cmd-enter": "editor::NewlineBelow",
+      "shift-enter": "editor::NewlineAbove",
+      "cmd-shift-enter": "editor::NewlineAbove",
+
+      // Indentation
+      "tab": "editor::Indent",
+      "shift-tab": "editor::Outdent",
+      "alt-tab": "vim::AutoIndent",
+
+      // Registers and folds
+      "ctrl-r": "vim::PushRegister",
+      "r": "editor::ToggleFold",
+      "shift-r": "editor::ToggleFoldRecursive",
+
+      // Find and sneak
+      "t": ["vim::PushFindForward", { "before": false, "multiline": true }],
+      "shift-t": ["vim::PushFindBackward", { "after": false, "multiline": true }],
+      "f": ["vim::PushFindForward", { "before": true, "multiline": true }],
+      "shift-f": ["vim::PushFindBackward", { "after": true, "multiline": true }],
+      "u": ["vim::PushSneak", {}],
+      "shift-u": ["vim::PushSneakBackward", {}],
+
+      // Subword motion
+      "w": "vim::NextSubwordStart",
+      "b": "vim::PreviousSubwordStart",
+      "e": "vim::NextSubwordEnd",
+
+      // Case conversion
+      "alt-u": "editor::ConvertToUpperCase",
+      "alt-l": "editor::ConvertToLowerCase",
+      "alt--": "editor::ConvertToKebabCase",
+      "alt-_": "editor::ConvertToSnakeCase",
+      "`": "vim::ChangeCase",
+      "alt-!": "editor::ConvertToTitleCase",
+      "alt-c": "editor::ConvertToLowerCamelCase",
+      "alt-shift-c": "editor::ConvertToUpperCamelCase",
+      "alt-+": "editor::ConvertToUpperCamelCase",
+
+      // Matching and references
+      "|": "vim::Matching",
+      "ctrl-g": "editor::FindAllReferences",
+      "!": "editor::FindAllReferences",
+      "_": "editor::GoToDefinition",
+
+      // Line navigation
+      "<": "vim::EndOfLine",
+      ">": "vim::FirstNonWhitespace",
+
+      // Adjust movement keys
+      "h": "vim::NextLineStart",
+      "l": "vim::PreviousLineStart",
+
+      // Partial word navigation
+      "cmd-l": ["vim::MoveToPrevious", { "partial_word": true }],
+      "cmd-h": ["vim::MoveToNext", { "partial_word": true }],
+      "ctrl-*": "vim::MoveToPrevious",
+
+      // Method navigation
+      "j": "vim::PreviousMethodStart",
+      "k": "vim::NextMethodStart",
+
+      // Sentence navigation
+      "shift-l": "vim::SentenceBackward",
+      "shift-h": "vim::SentenceForward",
+
+      // Indent navigation
+      "ctrl-l": "vim::PreviousSameIndent",
+      "ctrl-h": "vim::NextSameIndent",
+
+      // Increment/decrement
+      "+": "vim::Increment",
+      "-": "vim::Decrement",
+
+      // Repeat find
+      ",": "vim::RepeatFind",
+      ";": "vim::RepeatFindReversed",
+      "shift-,": "vim::RepeatFindReversed",
+
+      // Disable unwanted
+      "ctrl-y": null,
+
+      // Pane management
+      "= :": "pane::CloseActiveItem",
+      "= w": "pane::CloseAllItems",
+      "= =": "pane::CloseInactiveItems",
+      "= down": "pane::SplitDown",
+      "= up": "pane::SplitUp",
+      "= left": "pane::SplitLeft",
+      "= right": "pane::SplitRight",
+      "= shift-down": "workspace::SwapPaneDown",
+      "= shift-up": "workspace::SwapPaneUp",
+      "= shift-left": "workspace::SwapPaneLeft",
+      "= shift-right": "workspace::SwapPaneRight",
+      "= alt-down": "workspace::SwapPaneDown",
+      "= alt-up": "workspace::SwapPaneUp",
+      "= alt-left": "workspace::SwapPaneLeft",
+      "= alt-right": "workspace::SwapPaneRight",
+
+      // Pane activation
+      "g down": "workspace::ActivatePaneDown",
+      "g up": "workspace::ActivatePaneUp",
+      "g left": "workspace::ActivatePaneLeft",
+      "g right": "workspace::ActivatePaneRight",
+      "g shift-down": "workspace::SwapPaneDown",
+      "g shift-up": "workspace::SwapPaneUp",
+      "g shift-left": "workspace::SwapPaneLeft",
+      "g shift-right": "workspace::SwapPaneRight",
+      "g alt-down": "workspace::SwapPaneDown",
+      "g alt-up": "workspace::SwapPaneUp",
+      "g alt-left": "workspace::SwapPaneLeft",
+      "g alt-right": "workspace::SwapPaneRight"
+    }
+  },
+  {
+    // VimControl in Editor, normal mode, not in menu
+    "context": "VimControl && Editor && vim_mode == normal && !menu",
+    "bindings": {
+      "backspace": ["workspace::SendKeystrokes", "cmd-s cmd-t"],
+      "&": ["workspace::SendKeystrokes", "cmd-s cmd-t"]
+    }
+  },
+
+  // ===============================
+  // EDITOR DIAGNOSTICS, CODE ACTIONS, HOVER, COMPLETIONS
+  // ===============================
+  {
+    // Editor diagnostics and actions
+    "context": "Editor",
+    "bindings": {
+      "ctrl-{": "editor::GoToDiagnostic",
+      "ctrl-}": "editor::GoToDiagnostic",
+      "ctrl-(": "editor::ToggleCodeActions",
+      "ctrl-n": "editor::ToggleCodeActions",
+      "ctrl-)": "editor::ShowCompletions",
+      "ctrl-t": "editor::ShowCompletions",
+      "ctrl-?": "editor::Hover",
+      "ctrl-e": "editor::Hover"
+    }
+  },
+  {
+    // VimControl, normal mode, not in menu
+    "context": "VimControl && !menu && vim_mode == normal",
+    "bindings": {
+      "{": "editor::GoToDiagnostic",
+      "}": "editor::GoToPreviousDiagnostic",
+      "?": "editor::Hover",
+      "(": "editor::ToggleCodeActions",
+      ")": "editor::ShowCompletions",
+      "#": ["vim::Search", { "backwards": true }],
+      "ctrl-i": "assistant::InlineAssist"
+    }
+  },
+
+  // ===============================
+  // VIM TEXT OBJECTS
+  // ===============================
+  {
+    // Vim text objects (a, i, cs, ds operators)
+    "context": "vim_operator == a || vim_operator == i || vim_operator == cs || vim_operator == ds",
+    "bindings": {
+      "w": "vim::Word",
+      "shift-w": ["vim::Word", { "ignore_punctuation": true }],
+      "s": "vim::Subword",
+      "shift-s": ["vim::Subword", { "ignore_punctuation": true }],
+      "l": "vim::Sentence",
+      "t": "vim::Tag",
+      "n": "vim::AnyBrackets",
+      "i": "vim::AnyQuotes",
+      "e": "vim::IndentObj",
+      "shift-e": ["vim::IndentObj", { "include_below": true }]
+    }
+  },
+
+  // ===============================
+  // VIM INSERT MODE
+  // ===============================
+  {
+    // Vim insert mode navigation
+    "context": "vim_mode == insert",
+    "bindings": {
+      "ctrl-d": "vim::ScrollDown",
+      "ctrl-u": "vim::ScrollUp"
+    }
+  },
+
+  // ===============================
+  // VIM VISUAL MODE
+  // ===============================
+  {
+    // Vim visual mode in Editor, not in menu
+    "context": "Editor && vim_mode == visual && !menu",
+    "bindings": {
+      "v": "editor::SelectLargerSyntaxNode",
+      "V": "editor::SelectSmallerSyntaxNode",
+      "r": ["vim::PushAddSurrounds", {}]
+    }
+  },
+
+  // ===============================
+  // EDIT PREDICTION CONTEXTS
+  // ===============================
+  {
+    // Edit prediction navigation (full mode)
+    "context": "Editor && mode == full && edit_prediction",
+    "bindings": {
+      "alt-enter": "editor::NextEditPrediction",
+      "alt-shift-enter": "editor::PreviousEditPrediction",
+      "alt-e": "editor::AcceptPartialEditPrediction"
+    }
+  },
+  {
+    // Show edit prediction if not present
+    "context": "Editor && !edit_prediction",
+    "bindings": {
+      "alt-enter": "editor::ShowEditPrediction"
+    }
+  },
+  {
+    // Accept edit prediction
+    "context": "Editor && edit_prediction",
+    "bindings": {
+      "alt-enter": "editor::AcceptEditPrediction"
+    }
+  },
+  {
+    // Accept edit prediction in conflict
+    "context": "Editor && edit_prediction_conflict",
+    "bindings": {
+      "alt-enter": "editor::AcceptEditPrediction"
+    }
+  },
+
+  // ===============================
+  // PROJECT PANEL NAVIGATION
+  // ===============================
+  {
+    // Project Panel navigation (not editing)
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "j": "project_panel::CollapseSelectedEntry",
+      "h": "menu::SelectNext",
+      "l": "menu::SelectPrevious",
+      "k": "project_panel::ExpandSelectedEntry",
+      "o": "project_panel::CollapseAllEntries"
+    }
+  }
+]

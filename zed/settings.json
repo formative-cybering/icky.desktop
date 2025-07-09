@@ -1,23 +1,127 @@
+// ===============================
+// Zed Editor Settings
+// ===============================
+
 {
-  "vim_mode": true,
-  "features": {
-    "edit_prediction_provider": "copilot"
-  },
-  "agent": {
-    "always_allow_tool_actions": true,
-    "default_model": {
-      "provider": "zed.dev",
-      "model": "claude-sonnet-4"
-    }
-  },
+  // -------- Editor Basics --------
   "tab_size": 2,
+  "preferred_line_length": 100,
+  "soft_wrap": "editor_width",
+  "show_wrap_guides": false,
+
+  // -------- Fonts & Theme --------
   "ui_font_size": 20,
   "buffer_font_size": 22,
   "agent_font_size": 22,
   "ui_font_family": "Programma",
   "buffer_font_family": "Programma",
   "theme": "macOS Classic Dark2",
+
+  // -------- Vim Mode --------
+  "vim_mode": true,
+  "vim": {
+    "use_smartcase_find": true,
+    "use_system_clipboard": "on_yank"
+  },
+
+  // -------- Line Numbers & Guides --------
+  "relative_line_numbers": true,
+  "gutter": {
+    "line_numbers": true,
+    "runnables": false,
+    "folds": false
+  },
+  "indent_guides": {
+    "enabled": true,
+    "active_line_width": 2
+    // "coloring": "indent_aware",
+    // "background_coloring": "indent_aware",
+  },
+
+  // -------- Tabs & Tab Bar --------
+  "tab_bar": {
+    "show": false,
+    "show_nav_history_buttons": false
+  },
+  "tabs": {
+    "file_icons": true,
+    "close_position": "left",
+    "git_status": true
+  },
+  "preview_tabs": {
+    "enabled": true,
+    "enable_preview_from_file_finder": true,
+    "enable_preview_from_code_navigation": true
+  },
+
+  // -------- Panels & UI --------
+  "toolbar": {
+    "quick_actions": false
+  },
+  "inline_code_actions": false,
+  "project_panel": {
+    "button": false,
+    "dock": "right",
+    "indent_size": 16,
+    "scrollbar": {
+      "show": "never"
+    },
+    "indent_guides": {
+      "show": "never"
+    }
+  },
+  "outline_panel": {
+    "dock": "right",
+    "button": false
+  },
+  "collaboration_panel": {
+    "dock": "right",
+    "button": false
+  },
+  "chat_panel": {
+    "button": "never"
+  },
+  "notification_panel": {
+    "button": false
+  },
+  "terminal": {
+    "dock": "bottom",
+    "button": false
+  },
+  "debugger": {
+    "button": false
+  },
+  "search": {
+    "button": false
+  },
+  "git_panel": {
+    "dock": "right",
+    "button": false
+  },
+
+  // -------- Features & Integrations --------
+  "features": {
+    "edit_prediction_provider": "copilot"
+  },
+  "show_edit_predictions": false,
+  "edit_predictions": {
+    "mode": "subtle"
+  },
+  "agent": {
+    "always_allow_tool_actions": true,
+    "default_model": {
+      "model": "claude-sonnet-4"
+    }
+  },
+
+  // -------- File Types --------
   "file_types": {
     "Haskell": ["tidal"]
+  },
+
+  // -------- Telemetry --------
+  "telemetry": {
+    "metrics": false,
+    "diagnostics": false
   }
 }
