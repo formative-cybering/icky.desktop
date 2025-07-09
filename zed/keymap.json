@@ -317,8 +317,7 @@
     "context": "Editor && vim_mode == visual && !menu",
     "bindings": {
       "v": "editor::SelectLargerSyntaxNode",
-      "V": "editor::SelectSmallerSyntaxNode",
-      "r": ["vim::PushAddSurrounds", {}]
+      "V": "editor::SelectSmallerSyntaxNode"
     }
   },
 
@@ -356,11 +355,8 @@
     }
   },
 
-  // ===============================
   // PROJECT PANEL NAVIGATION
-  // ===============================
   {
-    // Project Panel navigation (not editing)
     "context": "ProjectPanel && not_editing",
     "bindings": {
       "j": "project_panel::CollapseSelectedEntry",
