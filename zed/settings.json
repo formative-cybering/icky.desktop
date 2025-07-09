@@ -108,6 +108,7 @@
     "mode": "subtle"
   },
   "agent": {
+    "button": false,
     "always_allow_tool_actions": true,
     "default_model": {
       "provider": "copilot_chat",
