@@ -4,18 +4,22 @@
 
 {
   // -------- Editor Basics --------
+  "icon_theme": "Colored Zed Icons Theme Dark",
   "tab_size": 2,
   "preferred_line_length": 100,
   "soft_wrap": "editor_width",
   "show_wrap_guides": false,
 
   // -------- Fonts & Theme --------
-  "ui_font_size": 20,
+  "ui_font_size": 22,
   "buffer_font_size": 22,
   "agent_font_size": 22,
   "ui_font_family": "Programma",
   "buffer_font_family": "Programma",
-  "theme": "macOS Classic Dark2",
+  "theme": {
+    "light": "Tokyo Night Light",
+    "dark": "macOS Classic Dark2"
+  },
 
   // -------- Vim Mode --------
   "vim_mode": true,
@@ -103,15 +107,17 @@
   "features": {
     "edit_prediction_provider": "copilot"
   },
-  "show_edit_predictions": false,
+  "show_completions_on_input": true,
+  "show_edit_predictions": true,
   "edit_predictions": {
     "mode": "subtle"
   },
   "agent": {
+    "button": false,
     "always_allow_tool_actions": true,
     "default_model": {
       "provider": "copilot_chat",
-      "model": "claude-sonnet-4"
+      "model": "gpt-4.1"
     }
   },
 
