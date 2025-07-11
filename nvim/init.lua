@@ -89,6 +89,16 @@ require("snippy").setup({
   },
 })
 
+require "nvim-treesitter.configs".setup {
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      node_incremental = "v",
+      node_decremental = "V",
+    },
+  },
+}
+
 local ensure_packer = function()
   local fn = vim.fn
   local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
@@ -114,7 +124,7 @@ return require("packer").startup(function(use)
   use("dcampos/nvim-snippy")
   use {
     "nvim-treesitter/nvim-treesitter",
-    run = ':TSUpdate'
+    run = ":TSUpdate"
   }
   use {
     "folke/trouble.nvim",
