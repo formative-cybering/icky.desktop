@@ -1,1 +1,1 @@
-*.json linguist-language=JSONC
+*.json linguist-language="JSON with Comments"
