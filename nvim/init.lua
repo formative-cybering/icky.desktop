@@ -14,7 +14,6 @@ vim.keymap.set(
   "<esc>mz<bar>vip<bar>:w !sh /home/slash/.config/tidal/s_tidal.sh<CR>`zli",
   { desc = "Tidal wave", silent = true, noremap = true }
 )
--- vim.keymap.set({ "x", "n", "s" }, "<C-r>", ":Files<CR>", { desc = "Open files" })
 vim.keymap.set(
   { "i", "x", "n", "s" },
   "<C-t>",
