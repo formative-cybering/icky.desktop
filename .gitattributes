@@ -1,2 +1,1 @@
-*.json text=auto linguist-language=jsonc
 **/*.json text=auto linguist-language=jsonc
