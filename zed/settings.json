@@ -37,9 +37,8 @@
   },
   "indent_guides": {
     "enabled": true,
-    "active_line_width": 2
-    // "coloring": "indent_aware",
-    // "background_coloring": "indent_aware",
+    "active_line_width": 2,
+    "coloring": "indent_aware"
   },
 
   // -------- Tabs & Tab Bar --------
