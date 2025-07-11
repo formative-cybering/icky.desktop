@@ -118,7 +118,7 @@ return require("packer").startup(function(use)
     end,
   })
   use("mbbill/undotree")
-  use("nvim-lua/plenary.nvim")
+  -- use("nvim-lua/plenary.nvim")
   use({
     "sphamba/smear-cursor.nvim",
     config = function()
