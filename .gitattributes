@@ -1,0 +1,2 @@
+dotfiles/.gitattributes
+*.json linguist-language=JSONC
