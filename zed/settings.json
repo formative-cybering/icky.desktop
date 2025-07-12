@@ -37,9 +37,8 @@
   },
   "indent_guides": {
     "enabled": true,
-    "active_line_width": 2
-    // "coloring": "indent_aware",
-    // "background_coloring": "indent_aware",
+    "active_line_width": 2,
+    "coloring": "indent_aware"
   },
 
   // -------- Tabs & Tab Bar --------
@@ -66,6 +65,7 @@
   "project_panel": {
     "button": false,
     "dock": "right",
+    "hide_root": true,
     "indent_size": 16,
     "scrollbar": {
       "show": "never"
@@ -107,8 +107,8 @@
   "features": {
     "edit_prediction_provider": "copilot"
   },
-  "show_completions_on_input": true,
-  "show_edit_predictions": true,
+  "show_completions_on_input": false,
+  "show_edit_predictions": false,
   "edit_predictions": {
     "mode": "subtle"
   },
