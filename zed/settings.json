@@ -22,7 +22,7 @@
   },
 
   // -------- Vim Mode --------
-  "vim_mode": true,
+  "vim_mode": false,
   "vim": {
     "use_smartcase_find": true,
     "use_system_clipboard": "on_yank"
@@ -118,6 +118,15 @@
     "default_model": {
       "provider": "copilot_chat",
       "model": "gpt-4.1"
+    }
+  },
+  "lsp": {
+    "hls": {
+      "initialization_options": {
+        "haskell": {
+          "formattingProvider": "fourmolu"
+        }
+      }
     }
   },
 
