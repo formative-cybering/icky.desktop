@@ -22,7 +22,7 @@
   },
 
   // -------- Vim Mode --------
-  "vim_mode": false,
+  "vim_mode": true,
   "vim": {
     "use_smartcase_find": true,
     "use_system_clipboard": "on_yank"
