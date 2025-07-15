@@ -17,6 +17,7 @@ nvim/plugin/*_compiled.lua
 !systemd/
 !systemd/**
 systemd/user/timers.target.wants
+systemd/user/graphical-session.target.wants
 !tidal/
 !tidal/**
 !tofi/
