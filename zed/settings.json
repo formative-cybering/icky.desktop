@@ -18,7 +18,7 @@
   "buffer_font_family": "Programma",
   "theme": {
     "light": "Tokyo Night Light",
-    "dark": "macOS Classic Dark2"
+    "dark": "Tokyo Night"
   },
 
   // -------- Vim Mode --------
