@@ -1,6 +1,7 @@
 * {
   font-family: boxcutter;
   font-size: 50px;
+  color: white;
 }
 
 window#waybar {
@@ -27,7 +28,6 @@ window#waybar {
 }
 
 #workspaces button {
-  color: white;
   opacity: 0.5;
   transition: 0.2s;
   outline: none;
@@ -39,6 +39,6 @@ window#waybar {
 }
 
 #workspaces button:hover {
-  color: red;
   opacity: 1;
+  background: black;
 }

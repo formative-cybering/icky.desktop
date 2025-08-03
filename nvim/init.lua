@@ -34,7 +34,6 @@ vim.opt.guicursor =
 	"n-v-c-sm-i-ci-ve:block,r-cr-o:hor20,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,i-ci-ve:ver25"
 
 -- Colorscheme & Highlights
-vim.cmd.colorscheme("oxocarbon")
 vim.cmd([[
   hi Normal guibg=NONE ctermbg=NONE
   hi StatusLine guibg=NONE ctermbg=NONE
@@ -95,8 +94,6 @@ local packer_bootstrap = ensure_packer()
 -- [[ Plugins ]]
 return require("packer").startup(function(use)
 	use("wbthomason/packer.nvim")
-
-	use("nyoom-engineering/oxocarbon.nvim")
 
 	use("andweeb/presence.nvim")
 	use({

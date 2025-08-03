@@ -9,14 +9,17 @@ local set_environment_variables = {
 -- This will hold the configuration.
 local config = wezterm.config_builder()
 
+
+config.font = wezterm.font 'Programma'
+config.font_dirs = {"/etc/fonts"}
+config.warn_about_missing_glyphs = false
+
 --config.front_end = "WebGpu"
 config.webgpu_power_preference = "HighPerformance"
 config.enable_wayland = true
-config.font_size = 15
+config.font_size = 18
 config.window_background_opacity = 0.825
-config.color_scheme = "Oxocarbon Dark (Gogh)"
-
-config.harfbuzz_features = { "calt=0", "clig=0", "liga=0" }
+-- config.color_scheme = "Oxocarbon Dark (Gogh)"
 
 config.keys = {
 	{ key = "c", mods = "CTRL", action = act.CopyTo("Clipboard") },
