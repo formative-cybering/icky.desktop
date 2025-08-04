@@ -41,4 +41,5 @@ window#waybar {
 #workspaces button:hover {
   opacity: 1;
   background: black;
+  border: none;
 }

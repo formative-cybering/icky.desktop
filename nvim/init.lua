@@ -94,7 +94,17 @@ local packer_bootstrap = ensure_packer()
 -- [[ Plugins ]]
 return require("packer").startup(function(use)
 	use("wbthomason/packer.nvim")
-
+	use({
+		"ficcdaf/ashen.nvim",
+		config = function()
+			require("ashen").setup({
+				-- your settings here, e.g.:
+				style_presets = { italic_comments = true },
+				transparent = true,
+			})
+			vim.cmd("colorscheme ashen")
+		end,
+	})
 	use("andweeb/presence.nvim")
 	use({
 		"dcampos/nvim-snippy",

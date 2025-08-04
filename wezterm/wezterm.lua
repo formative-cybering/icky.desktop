@@ -11,7 +11,7 @@ local config = wezterm.config_builder()
 
 
 config.font = wezterm.font 'Programma'
-config.font_dirs = {"/etc/fonts"}
+config.font_dirs = {"/usr/share/fonts"}
 config.warn_about_missing_glyphs = false
 
 --config.front_end = "WebGpu"
@@ -19,7 +19,7 @@ config.webgpu_power_preference = "HighPerformance"
 config.enable_wayland = true
 config.font_size = 18
 config.window_background_opacity = 0.825
--- config.color_scheme = "Oxocarbon Dark (Gogh)"
+config.color_scheme = 'Tomorrow Night Burns'
 
 config.keys = {
 	{ key = "c", mods = "CTRL", action = act.CopyTo("Clipboard") },
