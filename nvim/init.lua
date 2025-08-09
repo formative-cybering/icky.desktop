@@ -177,8 +177,10 @@ return require("packer").startup(function(use)
 				incremental_selection = {
 					enable = true,
 					keymaps = {
+						init_selection = "v",
 						node_incremental = "v",
-						node_decremental = "V",
+						scope_incremental = "V",
+						node_decremental = "<BS>",
 					},
 				},
 			})
