@@ -2,9 +2,6 @@
 !/.gitignore
 !/.gitattributes
 !README.md
-!cava/
-!cava/**
-cava/shaders/
 !hypr/
 !hyper/**
 !dunst/
