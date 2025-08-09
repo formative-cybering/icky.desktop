@@ -5,13 +5,13 @@ vim.keymap.set({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Sav
 vim.keymap.set(
 	{ "x", "n", "s" },
 	"<C-e>",
-	"<esc>mz<bar>vip<bar>:w !sh /home/slash/.config/tidal/s_tidal.sh<CR>`z",
+	"<esc>mz<bar>vip<bar>:w !sh /home/slash/.config/tidal/send_tidal.sh<CR>`z",
 	{ desc = "Tidal wave", silent = true, noremap = true }
 )
 vim.keymap.set(
 	{ "i" },
 	"<C-e>",
-	"<esc>mz<bar>vip<bar>:w !sh /home/slash/.config/tidal/s_tidal.sh<CR>`zli",
+	"<esc>mz<bar>vip<bar>:w !sh /home/slash/.config/tidal/send_tidal.sh<CR>`zli",
 	{ desc = "Tidal wave", silent = true, noremap = true }
 )
 vim.keymap.set(
