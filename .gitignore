@@ -16,6 +16,8 @@ cava/shaders/
 nvim/plugin/*_compiled.lua
 !ranger/
 !ranger/rc.conf
+!SuperCollider/
+!SuperCollider/**
 !systemd/
 !systemd/**
 systemd/user/timers.target.wants

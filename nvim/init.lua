@@ -49,7 +49,7 @@ vim.opt.expandtab = true
 vim.opt.smartindent = true
 
 -- Wrapping & Formatting
-vim.opt.wrap = false
+vim.opt.wrap = true
 vim.opt.nrformats:remove("octal")
 
 -- File Handling

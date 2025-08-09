@@ -14,6 +14,6 @@ wezterm cli activate-tab --tab-index 0
 
 # wezterm cli split-pane --cells 10 -- cava
 
-cd ~/bin
+cd ~/code/bin
 
 nvim .

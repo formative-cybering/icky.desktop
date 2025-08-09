@@ -4,10 +4,9 @@
 :set prompt ""
 
 import Sound.Tidal.Boot
-import Sound.Tidal.Context hiding (drum, drumN)
 import System.IO (hSetEncoding, stdout, utf8)
 
-default (Pattern String, Integer, Double)
+default (Rational, Pattern String, Integer, Double)
 
 -- Set UTF8 encoding
 :{
@@ -97,13 +96,13 @@ let inst = pS "inst"
         notePos = notes * pure (12/divisions)
         midiNote = floor <$> notePos
         bendAmt = (notePos - (fromIntegral <$> midiNote)) * pure (16383/15)
-      in stack 
+      in stack
         [ n (fromIntegral <$> midiNote),
           midibend (min 16383 <$> bendAmt)
         ]
 
     vrm y z = n y # s "vrm" # midichan z
-    vm z = vrm (-24) z # nudge 0.046 # amp 1    
+    vm z = vrm (-24) z # nudge 0.046 # amp 1
     timeLoop' n o f = timeLoop n $ (o <~) f
     timeLoop'' n o f = (o ~>) $ timeLoop n $ (o <~) f
     tl' = timeLoop'
@@ -133,7 +132,7 @@ let inst = pS "inst"
 
     lxrdChannel :: Num a => String -> a
     lxrdChannel "k" = 9
-    lxrdChannel "s" = 12  
+    lxrdChannel "s" = 12
     lxrdChannel "c" = 13
     lxrdChannel "o" = 15
     lxrdChannel "h" = 14
@@ -186,10 +185,8 @@ let inst = pS "inst"
     setB = streamSetB
 :}
 
-enableLink
+-- enableLink
 
 :set -fwarn-orphans
 :set prompt "tidal> "
 :set prompt-cont ""
-
-
