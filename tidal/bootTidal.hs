@@ -8,7 +8,6 @@ import System.IO (hSetEncoding, stdout, utf8)
 
 default (Rational, Pattern String, Integer, Double)
 
--- Set UTF8 encoding
 :{
 let _ = hSetEncoding stdout utf8
 :}
@@ -188,5 +187,5 @@ let inst = pS "inst"
 -- enableLink
 
 :set -fwarn-orphans
-:set prompt "tidal> "
+:set prompt "slash> "
 :set prompt-cont ""
