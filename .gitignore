@@ -11,6 +11,8 @@
 !nvim/
 !nvim/**
 nvim/plugin/*_compiled.lua
+!omarchy/
+!omarchy/**
 !ranger/
 !ranger/rc.conf
 !SuperCollider/
@@ -30,3 +32,5 @@ systemd/user/graphical-session.target.wants
 !zed/
 !zed/**
 zed/.*
+!zen-browser/
+!zen-browser/**
