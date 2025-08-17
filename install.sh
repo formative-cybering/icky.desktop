@@ -2,6 +2,11 @@
 
 set -euo pipefail
 
+# Fonts
+sudo cp ./fonts/boxcutter.ttf /usr/share/fonts/boxcutter.ttf
+sudo cp ./fonts/programma.otf /usr/share/fonts/programma.otf
+sudo fc-cache -fv
+
 # Install yay
 if ! command -v yay &>/dev/null; then
   git clone https://aur.archlinux.org/yay.git /tmp/yay
@@ -43,6 +48,7 @@ main_packages=(
   cpio
   pixterm-git
   1password
+  ttf-nerd-fonts-symbols
 )
 
 yes | yay -S "${main_packages[@]}"
