@@ -38,7 +38,6 @@ if gum confirm "Do you want to install mostly everything?"; then
     wezterm-git
     kitty
     ranger-git
-    nnn
     zed-preview
     stylua
     go
