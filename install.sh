@@ -54,6 +54,7 @@ if gum confirm "Do you want to install mostly everything?"; then
     wezterm-git
     kitty
     ranger-git
+    nnn
     zed-preview
     stylua
     go
@@ -73,6 +74,10 @@ if gum confirm "Do you want to install mostly everything?"; then
     pixterm-git
     1password
     ttf-nerd-fonts-symbols
+    libsixel
+    mpv
+    ffmpeg
+    handbrake
   )
   yes | yay -S --needed "${main_packages[@]}"
 fi
