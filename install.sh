@@ -45,6 +45,8 @@ if gum confirm "Do you want to install mostly everything?"; then
     stylua
     go
     deno
+    nodejs-git
+    pnpm
 
     zen-browser-bin
     chromium
@@ -71,11 +73,12 @@ if gum confirm "Do you want to install mostly everything?"; then
     p7zip
   )
   yes | yay -S --needed "${main_packages[@]}"
+  hyprpm update
+  hyprpm add https://github.com/hyprwm/hyprland-plugins
+  hyprpm enable hyprfocus
 fi
 
-hyprpm update
-hyprpm add https://github.com/hyprwm/hyprland-plugins
-hyprpm enable hyprfocus
+
 
 # haskell
 if gum confirm "Haskell anyone?"; then
