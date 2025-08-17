@@ -45,7 +45,7 @@ if gum confirm "Do you want to install mostly everything?"; then
     stylua
     go
     deno
-    nodejs-git
+    nodejs
     pnpm
 
     zen-browser-bin
