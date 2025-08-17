@@ -31,6 +31,13 @@ if gum confirm "Haskell anyone?"; then
   cabal install tidal --lib
 fi
 
+# deno
+if gum confirm "Deno?"; then
+  if ! command -v deno &>/dev/null; then
+    curl -fsSL https://deno.land/install.sh | sh
+  fi
+fi
+
 # mostly everything
 if gum confirm "Do you want to install mostly everything?"; then
   main_packages=(
@@ -68,13 +75,6 @@ if gum confirm "Do you want to install mostly everything?"; then
     ttf-nerd-fonts-symbols
   )
   yes | yay -S "${main_packages[@]}"
-fi
-
-# deno
-if gum confirm "Deno?"; then
-  if ! command -v deno &>/dev/null; then
-    curl -fsSL https://deno.land/install.sh | sh
-  fi
 fi
 
 echo "💦 Done"
