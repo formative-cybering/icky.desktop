@@ -7,6 +7,17 @@ sudo cp ./fonts/boxcutter.ttf /usr/share/fonts/boxcutter.ttf
 sudo cp ./fonts/programma.otf /usr/share/fonts/programma.otf
 sudo fc-cache -fv
 
+# Haskell toolchain setup
+if ! command -v ghcup &>/dev/null; then
+  curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
+fi
+
+# Haskell packages
+if command -v cabal &>/dev/null; then
+  cabal install fourmolu
+  cabal install tidal --lib
+fi
+
 # yay
 if ! command -v yay &>/dev/null; then
   git clone https://aur.archlinux.org/yay.git /tmp/yay
@@ -53,18 +64,6 @@ main_packages=(
 )
 
 yes | yay -S "${main_packages[@]}"
-
-
-# Haskell toolchain setup
-if ! command -v ghcup &>/dev/null; then
-  curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
-fi
-
-# Haskell packages
-if command -v cabal &>/dev/null; then
-  cabal install fourmolu
-  cabal install tidal --lib
-fi
 
 # Deno
 if ! command -v deno &>/dev/null; then
