@@ -2,6 +2,19 @@
 
 set -euo pipefail
 
+# yay
+if ! command -v yay &>/dev/null; then
+  git clone https://aur.archlinux.org/yay.git /tmp/yay
+  pushd /tmp/yay
+  makepkg -si --noconfirm
+  popd
+  rm -rf /tmp/yay
+fi
+
+if ! command -v gum &>/dev/null; then
+   yay -S gum
+fi
+
 # Fonts
 sudo cp ./fonts/boxcutter.ttf /usr/share/fonts/boxcutter.ttf
 sudo cp ./fonts/programma.otf /usr/share/fonts/programma.otf
@@ -16,15 +29,6 @@ fi
 if command -v cabal &>/dev/null; then
   cabal install fourmolu
   cabal install tidal --lib
-fi
-
-# yay
-if ! command -v yay &>/dev/null; then
-  git clone https://aur.archlinux.org/yay.git /tmp/yay
-  pushd /tmp/yay
-  makepkg -si --noconfirm
-  popd
-  rm -rf /tmp/yay
 fi
 
 # Mostly everything
