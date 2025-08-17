@@ -74,7 +74,7 @@ if gum confirm "Do you want to install mostly everything?"; then
     1password
     ttf-nerd-fonts-symbols
   )
-  yes | yay -S "${main_packages[@]}"
+  yes | yay -S --needed "${main_packages[@]}"
 fi
 
 echo "💦 Done"
