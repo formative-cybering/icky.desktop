@@ -78,8 +78,6 @@ if gum confirm "Do you want to install mostly everything?"; then
   hyprpm enable hyprfocus
 fi
 
-
-
 # haskell
 if gum confirm "Haskell anyone?"; then
   if ! command -v ghcup &>/dev/null; then
