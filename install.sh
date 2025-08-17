@@ -71,6 +71,7 @@ if gum confirm "Do you want to install mostly everything?"; then
     ffmpeg
     handbrake
     p7zip
+    xdg-desktop-portal
   )
   yes | yay -S --needed "${main_packages[@]}"
   hyprpm update
