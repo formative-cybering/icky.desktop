@@ -6,3 +6,5 @@ yay -S hyprland hyprshade nvim zed-preview waybar dunst hyprpaper ranger superco
 
 # ghc/haskell
 curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
+
+cabal install tidal fourmolu
