@@ -22,16 +22,6 @@ if gum confirm "Copy fonts?"; then
   sudo cp ./fonts/programma.otf /usr/share/fonts/programma.otf
 fi
 
-# haskell
-if gum confirm "Haskell anyone?"; then
-  if ! command -v ghcup &>/dev/null; then
-    curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
-    source ~/.bashrc
-  fi
-  cabal install fourmolu
-  cabal install tidal --lib
-fi
-
 # mostly everything
 if gum confirm "Do you want to install mostly everything?"; then
   main_packages=(
@@ -76,6 +66,16 @@ if gum confirm "Do you want to install mostly everything?"; then
     p7zip
   )
   yes | yay -S --needed "${main_packages[@]}"
+fi
+
+# haskell
+if gum confirm "Haskell anyone?"; then
+  if ! command -v ghcup &>/dev/null; then
+    curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
+    source ~/.bashrc
+  fi
+  cabal install fourmolu
+  cabal install tidal --lib
 fi
 
 echo "💦 Done"
