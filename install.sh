@@ -30,7 +30,7 @@ main_packages=(
   nvim
   wezterm-git
   kitty
-  ranger
+  ranger-git
   zed-preview
   stylua
   go
