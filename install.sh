@@ -26,16 +26,10 @@ fi
 if gum confirm "Haskell anyone?"; then
   if ! command -v ghcup &>/dev/null; then
     curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
+    source ~/.bashrc
   fi
   cabal install fourmolu
   cabal install tidal --lib
-fi
-
-# deno
-if gum confirm "Deno?"; then
-  if ! command -v deno &>/dev/null; then
-    curl -fsSL https://deno.land/install.sh | sh
-  fi
 fi
 
 # mostly everything
@@ -58,6 +52,7 @@ if gum confirm "Do you want to install mostly everything?"; then
     zed-preview
     stylua
     go
+    deno
 
     zen-browser-bin
     chromium
@@ -78,6 +73,7 @@ if gum confirm "Do you want to install mostly everything?"; then
     mpv
     ffmpeg
     handbrake
+    p7zip
   )
   yes | yay -S --needed "${main_packages[@]}"
 fi
