@@ -26,6 +26,8 @@ main_packages=(
   kitty
   ranger
   zed-preview
+  stylua
+  go
 
   zen-browser-bin
   chromium
@@ -54,8 +56,11 @@ fi
 # Haskell packages
 if command -v cabal &>/dev/null; then
   cabal install tidal fourmolu
-else
-  echo "cabal not found. Please ensure GHCup installed cabal."
+fi
+
+# Deno
+if ! command -v deno &>/dev/null; then
+  curl -fsSL https://deno.land/install.sh | sh
 fi
 
 echo "💦 Done"
