@@ -21,10 +21,11 @@ main_packages=(
   hyprland
   hyprshade
   hyprpaper
-  waybar
-  dunst
   hyprlock
   hypridle
+  tofi
+  dunst
+  waybar
 
   nvim
   wezterm-git
