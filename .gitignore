@@ -25,6 +25,8 @@ systemd/user/graphical-session.target.wants
 !tidal/**
 !tofi/
 !tofi/**
+!wallpapers/
+!wallpapers/**
 !waybar/
 !waybar/**
 !wezterm/
