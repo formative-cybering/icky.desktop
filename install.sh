@@ -33,6 +33,9 @@ if gum confirm "Do you want to install mostly everything?"; then
     tofi
     dunst
     waybar
+    wl-clipboard
+    slurp
+    grim
 
     nvim
     wezterm-git
@@ -51,6 +54,9 @@ if gum confirm "Do you want to install mostly everything?"; then
     supercollider
     qpwgraph
     lollypop
+    obs-studio
+    reaper
+    tenacity
 
     github-cli
     dolphin
@@ -66,6 +72,10 @@ if gum confirm "Do you want to install mostly everything?"; then
   )
   yes | yay -S --needed "${main_packages[@]}"
 fi
+
+hyprpm update
+hyprpm add https://github.com/hyprwm/hyprland-plugins
+hyprpm enable hyprfocus
 
 # haskell
 if gum confirm "Haskell anyone?"; then
