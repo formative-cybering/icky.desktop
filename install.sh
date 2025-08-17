@@ -17,12 +17,13 @@ if ! command -v gum &>/dev/null; then
 fi
 
 # fonts
-sudo cp ./fonts/boxcutter.ttf /usr/share/fonts/boxcutter.ttf
-sudo cp ./fonts/programma.otf /usr/share/fonts/programma.otf
-sudo fc-cache -fv
+if gum confirm "Copy fonts?"; then
+  sudo cp ./fonts/boxcutter.ttf /usr/share/fonts/boxcutter.ttf
+  sudo cp ./fonts/programma.otf /usr/share/fonts/programma.otf
+fi
 
 # haskell
-if gum confirm "Do you want to install the Haskell toolchain?"; then
+if gum confirm "Haskell anyone?"; then
   if ! command -v ghcup &>/dev/null; then
     curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
   fi
@@ -70,7 +71,7 @@ if gum confirm "Do you want to install mostly everything?"; then
 fi
 
 # deno
-if gum confirm "Do you want to install Deno?"; then
+if gum confirm "Deno?"; then
   if ! command -v deno &>/dev/null; then
     curl -fsSL https://deno.land/install.sh | sh
   fi
