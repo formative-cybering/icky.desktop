@@ -11,67 +11,69 @@ if ! command -v yay &>/dev/null; then
   rm -rf /tmp/yay
 fi
 
+# gum
 if ! command -v gum &>/dev/null; then
-   yay -S gum
+  yay -S gum
 fi
 
-# Fonts
+# fonts
 sudo cp ./fonts/boxcutter.ttf /usr/share/fonts/boxcutter.ttf
 sudo cp ./fonts/programma.otf /usr/share/fonts/programma.otf
 sudo fc-cache -fv
 
-# Haskell toolchain setup
-if ! command -v ghcup &>/dev/null; then
-  curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
-fi
-
-# Haskell packages
-if command -v cabal &>/dev/null; then
+# haskell
+if gum confirm "Do you want to install the Haskell toolchain?"; then
+  if ! command -v ghcup &>/dev/null; then
+    curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
+  fi
   cabal install fourmolu
   cabal install tidal --lib
 fi
 
-# Mostly everything
-main_packages=(
-  hyprland
-  hyprshade
-  hyprpaper
-  hyprlock
-  hypridle
-  tofi
-  dunst
-  waybar
+# mostly everything
+if gum confirm "Do you want to install mostly everything?"; then
+  main_packages=(
+    hyprland
+    hyprshade
+    hyprpaper
+    hyprlock
+    hypridle
+    tofi
+    dunst
+    waybar
 
-  nvim
-  wezterm-git
-  kitty
-  ranger-git
-  zed-preview
-  stylua
-  go
+    nvim
+    wezterm-git
+    kitty
+    ranger-git
+    zed-preview
+    stylua
+    go
 
-  zen-browser-bin
-  chromium
-  signal-desktop
-  nicotine
+    zen-browser-bin
+    chromium
+    signal-desktop
+    nicotine
 
-  supercollider
-  qpwgraph
-  lollypop
+    supercollider
+    qpwgraph
+    lollypop
 
-  github-cli
-  dolphin
-  cpio
-  pixterm-git
-  1password
-  ttf-nerd-fonts-symbols
-)
+    github-cli
+    dolphin
+    cpio
+    pixterm-git
+    1password
+    ttf-nerd-fonts-symbols
+  )
+  yes | yay -S "${main_packages[@]}"
+fi
 
-yes | yay -S "${main_packages[@]}"
-
-# Deno
-if ! command -v deno &>/dev/null; then
-  curl -fsSL https://deno.land/install.sh | sh
+# deno
+if gum confirm "Do you want to install Deno?"; then
+  if ! command -v deno &>/dev/null; then
+    curl -fsSL https://deno.land/install.sh | sh
+  fi
 fi
 
 echo "💦 Done"
