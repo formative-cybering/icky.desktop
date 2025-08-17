@@ -61,7 +61,8 @@ fi
 
 # Haskell packages
 if command -v cabal &>/dev/null; then
-  cabal install tidal fourmolu
+  cabal install fourmolu
+  cabal install tidal --lib
 fi
 
 # Deno
