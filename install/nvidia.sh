@@ -47,6 +47,8 @@ if [ -n "$(lspci | grep -i 'nvidia')" ]; then
     "lib32-nvidia-utils"
     "egl-wayland"
     "libva-nvidia-driver" # For VA-API hardware acceleration
+    "vulkan-icd-loader"
+    "lib32-vulkan-icd-loader"
     "qt5-wayland"
     "qt6-wayland"
   )
