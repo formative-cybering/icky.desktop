@@ -18,13 +18,13 @@ fi
 
 # fonts
 if gum confirm "Copy fonts?"; then
-  sudo cp ./fonts/boxcutter.ttf /usr/share/fonts/boxcutter.ttf
-  sudo cp ./fonts/programma.otf /usr/share/fonts/programma.otf
+  mkdir /usr/share/fonts/
+  sudo cp ../fonts/boxcutter.ttf /usr/share/fonts/boxcutter.ttf
+  sudo cp ../fonts/programma.otf /usr/share/fonts/programma.otf
 fi
 
-# mostly everything
-if gum confirm "Do you want to install mostly everything?"; then
-  main_packages=(
+if gum confirm "Install core?"; then
+  core_packages=(
     hyprland
     hyprshade
     hyprpaper
@@ -37,23 +37,27 @@ if gum confirm "Do you want to install mostly everything?"; then
     slurp
     grim
     rose-pine-hyprcursor
-
     nvim
     wezterm-git
-    kitty
     ranger-git
-    zed-preview
+    zen-browser-bin
+    chromium
+    xdg-desktop-portal
+    libsixel
+  )
+  yay -S --needed --noconfirm "${core_packages[@]}"
+fi
+
+if gum confirm "Install extra?"; then
+  extra_packages=(
+    kitty
     stylua
     go
     deno
     nodejs
     pnpm
-
-    zen-browser-bin
-    chromium
     signal-desktop
     nicotine
-
     supercollider
     qpwgraph
     lollypop
@@ -61,33 +65,16 @@ if gum confirm "Do you want to install mostly everything?"; then
     reaper
     tenacity
     ffmpeg
-
     github-cli
     dolphin
     cpio
     pixterm-git
     1password
-    ttf-nerd-fonts-symbols
-    libsixel
     mpv
     handbrake
     p7zip
-    xdg-desktop-portal
   )
-  yes | yay -S --needed "${main_packages[@]}"
-  hyprpm update
-  hyprpm add https://github.com/hyprwm/hyprland-plugins
-  hyprpm enable hyprfocus
-fi
-
-# haskell
-if gum confirm "Haskell anyone?"; then
-  if ! command -v ghcup &>/dev/null; then
-    curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
-    source ~/.bashrc
-  fi
-  cabal install fourmolu
-  cabal install tidal --lib
+  yay -S --needed --noconfirm "${extra_packages[@]}"
 fi
 
 echo "💦 Done"

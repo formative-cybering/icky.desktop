@@ -10,6 +10,8 @@
 !fonts/**
 !hypr/
 !hypr/**
+!install
+!install/**
 !nvim/
 !nvim/**
 nvim/plugin/*_compiled.lua
