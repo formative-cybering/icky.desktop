@@ -60,6 +60,7 @@ if gum confirm "Do you want to install mostly everything?"; then
     obs-studio
     reaper
     tenacity
+    ffmpeg
 
     github-cli
     dolphin
@@ -69,7 +70,6 @@ if gum confirm "Do you want to install mostly everything?"; then
     ttf-nerd-fonts-symbols
     libsixel
     mpv
-    ffmpeg
     handbrake
     p7zip
     xdg-desktop-portal
