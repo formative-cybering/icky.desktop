@@ -18,7 +18,7 @@ fi
 
 # fonts
 if gum confirm "Copy fonts?"; then
-  mkdir /usr/share/fonts/
+  sudo mkdir -p /usr/share/fonts/
   sudo cp ../fonts/boxcutter.ttf /usr/share/fonts/boxcutter.ttf
   sudo cp ../fonts/programma.otf /usr/share/fonts/programma.otf
 fi
