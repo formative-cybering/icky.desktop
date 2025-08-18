@@ -36,6 +36,7 @@ if gum confirm "Do you want to install mostly everything?"; then
     wl-clipboard
     slurp
     grim
+    rose-pine-hyprcursor
 
     nvim
     wezterm-git
