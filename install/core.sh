@@ -2,6 +2,8 @@
 
 set -euo pipefail
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 # yay
 if ! command -v yay &>/dev/null; then
   git clone https://aur.archlinux.org/yay.git /tmp/yay
@@ -19,8 +21,8 @@ fi
 # fonts
 if gum confirm "Copy fonts?"; then
   sudo mkdir -p /usr/share/fonts/
-  sudo cp ../fonts/boxcutter.ttf /usr/share/fonts/boxcutter.ttf
-  sudo cp ../fonts/programma.otf /usr/share/fonts/programma.otf
+  sudo cp "$SCRIPT_DIR/../fonts/boxcutter.ttf" /usr/share/fonts/boxcutter.ttf
+  sudo cp "$SCRIPT_DIR/../fonts/programma.otf" /usr/share/fonts/programma.otf
 fi
 
 if gum confirm "Install core?"; then
