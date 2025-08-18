@@ -44,6 +44,7 @@ if gum confirm "Install core?"; then
     chromium
     xdg-desktop-portal
     libsixel
+    qt6ct
   )
   yay -S --needed --noconfirm "${core_packages[@]}"
 fi
