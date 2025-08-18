@@ -60,6 +60,7 @@ if gum confirm "Install extra?"; then
     signal-desktop
     nicotine
     supercollider
+    gnome-keyring
     qpwgraph
     lollypop
     obs-studio
