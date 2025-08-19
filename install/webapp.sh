@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# omarchy web app install
+# https://github.com/basecamp/omarchy/blob/master/bin/omarchy-webapp-install
+
 if [ "$#" -ne 3 ]; then
   echo -e "\e[32mLet's create a new web app you can start with the app launcher.\n\e[0m"
   APP_NAME=$(gum input --prompt "Name> " --placeholder "My favorite web app")
@@ -44,4 +47,3 @@ chmod +x "$DESKTOP_FILE"
 if [ "$#" -ne 3 ]; then
   echo -e "You can now find $APP_NAME using the app launcher (SUPER + SPACE)\n"
 fi
-
