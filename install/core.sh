@@ -19,10 +19,11 @@ if ! command -v gum &>/dev/null; then
 fi
 
 # fonts
-if gum confirm "Copy fonts?"; then
+if gum confirm "Install fonts?"; then
   sudo mkdir -p /usr/share/fonts/
   sudo cp "$SCRIPT_DIR/../fonts/boxcutter.ttf" /usr/share/fonts/boxcutter.ttf
   sudo cp "$SCRIPT_DIR/../fonts/programma.otf" /usr/share/fonts/programma.otf
+  yay -S --noconfirm --needed ttf-font-awesome ttf-cascadia-mono-nerd noto-fonts noto-fonts-emoji
 fi
 
 if gum confirm "Install core?"; then
@@ -69,13 +70,15 @@ if gum confirm "Install extra?"; then
     tenacity
     ffmpeg
     github-cli
-    dolphin
+    zed
+    nemo
     cpio
     pixterm-git
     1password
     mpv
     handbrake
     p7zip
+    geary
   )
   yay -S --needed --noconfirm "${extra_packages[@]}"
 fi
