@@ -16,7 +16,7 @@ if ! command -v gum &>/dev/null; then
   yay -S gum
 fi
 
-if gum confirm "✏️ Fonts?"; then
+if gum confirm "📝 Fonts?"; then
   sudo mkdir -p /usr/share/fonts/
   sudo cp "$SCRIPT_DIR/../fonts/boxcutter.ttf" /usr/share/fonts/boxcutter.ttf
   sudo cp "$SCRIPT_DIR/../fonts/programma.otf" /usr/share/fonts/programma.otf
