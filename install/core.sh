@@ -4,7 +4,6 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# yay
 if ! command -v yay &>/dev/null; then
   git clone https://aur.archlinux.org/yay.git /tmp/yay
   pushd /tmp/yay
@@ -13,12 +12,10 @@ if ! command -v yay &>/dev/null; then
   rm -rf /tmp/yay
 fi
 
-# gum
 if ! command -v gum &>/dev/null; then
   yay -S gum
 fi
 
-# fonts
 if gum confirm "Install fonts?"; then
   sudo mkdir -p /usr/share/fonts/
   sudo cp "$SCRIPT_DIR/../fonts/boxcutter.ttf" /usr/share/fonts/boxcutter.ttf
@@ -33,57 +30,69 @@ if gum confirm "Install core?"; then
     hyprpaper
     hyprlock
     hypridle
+    rose-pine-hyprcursor
+
     tofi
     dunst
     waybar
     wl-clipboard
     slurp
     grim
-    rose-pine-hyprcursor
+
     nvim
+    helix
     wezterm-git
+    kitty
+    nnn
+    zed
+    fzf
+
     zen-browser-bin
     chromium
-    xdg-desktop-portal
-    libsixel
-    qt6ct
-    helix
-    nnn
+
     ffmpeg
-    jq
-    fzf
     imagemagick
+    libsixel
+
+    kvantum-qt5
+    qt6ct
+    gnome-themes-extra
+    xdg-desktop-portal
+    gnome-keyring
+    nemo
+    cpio
+    geary
   )
   yay -S --needed --noconfirm "${core_packages[@]}"
+
+  gsettings set org.gnome.desktop.interface gtk-theme "Adwaita-dark"
+  gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"
 fi
 
 if gum confirm "Install extra?"; then
   extra_packages=(
-    kitty
-    stylua
+    # Development tools
     go
     deno
     nodejs
     pnpm
+    github-cli
+    stylua
+
     signal-desktop
-    nicotine
-    supercollider
-    gnome-keyring
-    qpwgraph
+
     lollypop
-    obs-studio
     reaper
     tenacity
-    github-cli
-    zed
-    nemo
-    cpio
-    pixterm-git
-    1password
+    nicotine
+
+    obs-studio
     mpv
     handbrake
     p7zip
-    geary
+    pixterm-git
+
+    1password
   )
   yay -S --needed --noconfirm "${extra_packages[@]}"
 fi
