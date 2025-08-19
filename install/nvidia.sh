@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+set -euo pipefail
 
 # ==============================================================================
 # Hyprland NVIDIA Setup Script for Arch Linux

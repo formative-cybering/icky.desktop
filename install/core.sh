@@ -16,14 +16,14 @@ if ! command -v gum &>/dev/null; then
   yay -S gum
 fi
 
-if gum confirm "Install fonts?"; then
+if gum confirm "✏️ Fonts?"; then
   sudo mkdir -p /usr/share/fonts/
   sudo cp "$SCRIPT_DIR/../fonts/boxcutter.ttf" /usr/share/fonts/boxcutter.ttf
   sudo cp "$SCRIPT_DIR/../fonts/programma.otf" /usr/share/fonts/programma.otf
   yay -S --noconfirm --needed ttf-font-awesome ttf-cascadia-mono-nerd noto-fonts noto-fonts-emoji
 fi
 
-if gum confirm "Install core?"; then
+if gum confirm "👨‍🍳 Core?"; then
   core_packages=(
     hyprland
     hyprshade
@@ -69,7 +69,7 @@ if gum confirm "Install core?"; then
   gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"
 fi
 
-if gum confirm "Install extra?"; then
+if gum confirm "👨‍🍳 More?"; then
   extra_packages=(
     # Development tools
     go
