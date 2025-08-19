@@ -48,6 +48,8 @@ if gum confirm "Install core?"; then
     xdg-desktop-portal
     libsixel
     qt6ct
+    nnn
+    helix
   )
   yay -S --needed --noconfirm "${core_packages[@]}"
 fi
