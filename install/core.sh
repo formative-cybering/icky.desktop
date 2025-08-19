@@ -48,15 +48,10 @@ if gum confirm "Install core?"; then
     libsixel
     qt6ct
     helix
-    yazi
+    nnn
     ffmpeg
     jq
-    poppler
-    fd
-    ripgrep
     fzf
-    zoxide
-    resvg
     imagemagick
   )
   yay -S --needed --noconfirm "${core_packages[@]}"
