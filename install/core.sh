@@ -42,14 +42,22 @@ if gum confirm "Install core?"; then
     rose-pine-hyprcursor
     nvim
     wezterm-git
-    ranger-git
     zen-browser-bin
     chromium
     xdg-desktop-portal
     libsixel
     qt6ct
-    nnn
     helix
+    yazi
+    ffmpeg
+    jq
+    poppler
+    fd
+    ripgrep
+    fzf
+    zoxide
+    resvg
+    imagemagick
   )
   yay -S --needed --noconfirm "${core_packages[@]}"
 fi
@@ -71,7 +79,6 @@ if gum confirm "Install extra?"; then
     obs-studio
     reaper
     tenacity
-    ffmpeg
     github-cli
     zed
     nemo
