@@ -17,8 +17,6 @@
 nvim/plugin/*_compiled.lua
 !omarchy/
 !omarchy/**
-!ranger/
-!ranger/rc.conf
 !SuperCollider/
 !SuperCollider/**
 !systemd/
