@@ -71,7 +71,6 @@ fi
 
 if gum confirm "👨‍🍳 More?"; then
   extra_packages=(
-    # Development tools
     go
     deno
     nodejs
