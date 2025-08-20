@@ -84,12 +84,14 @@ if gum confirm "👨‍🍳 More?"; then
     reaper
     tenacity
     nicotine
+    kid3
 
     obs-studio
     mpv
     handbrake
     p7zip
     pixterm-git
+    less
 
     1password
   )
