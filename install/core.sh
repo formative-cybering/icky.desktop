@@ -59,6 +59,7 @@ if gum confirm "👨‍🍳 Core?"; then
     gnome-themes-extra
     xdg-desktop-portal
     gnome-keyring
+    polkit-gnome
     nemo
     cpio
     geary
