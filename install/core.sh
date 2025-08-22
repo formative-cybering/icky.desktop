@@ -60,6 +60,7 @@ if gum confirm "👨‍🍳 Core?"; then
     xdg-desktop-portal
     gnome-keyring
     polkit-gnome
+    file-roller
     nemo
     cpio
     geary
