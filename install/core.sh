@@ -64,6 +64,8 @@ if gum confirm "👨‍🍳 Core?"; then
     nemo
     cpio
     geary
+    imv
+    evince
   )
   yay -S --needed --noconfirm "${core_packages[@]}"
 
