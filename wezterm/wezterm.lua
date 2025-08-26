@@ -18,8 +18,9 @@ config.warn_about_missing_glyphs = false
 config.webgpu_power_preference = "HighPerformance"
 config.enable_wayland = true
 config.font_size = 18
-config.window_background_opacity = 0.825
-config.color_scheme = 'Tomorrow Night Burns'
+config.window_background_opacity = 0.9
+config.enable_tab_bar = false
+config.color_scheme = "Tomorrow Night Burns"
 
 config.keys = {
 	{ key = "c", mods = "CTRL", action = act.CopyTo("Clipboard") },
