@@ -55,7 +55,7 @@ if gum confirm "👨‍🍳 Core?"; then
     libsixel
 
     kvantum-qt5
-    qt6ct
+    hyprqt6engine
     gnome-themes-extra
     xdg-desktop-portal
     gnome-keyring
