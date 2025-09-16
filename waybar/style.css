@@ -1,6 +1,6 @@
 * {
   font-family: boxcutter;
-  font-size: 50px;
+  font-size: 40px;
   color: white;
 }
 
@@ -17,7 +17,7 @@ window#waybar {
 
 #wireplumber,
 #network,
-#custom-media {
+#battery {
   margin-left: 25px;
 }
 
