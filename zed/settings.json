@@ -11,18 +11,18 @@
   "show_wrap_guides": false,
 
   // -------- Fonts & Theme --------
-  "ui_font_size": 22,
-  "buffer_font_size": 22,
-  "agent_font_size": 22,
+  "ui_font_size": 18,
+  "buffer_font_size": 18,
+  "agent_font_size": 18,
   "ui_font_family": "Programma",
   "buffer_font_family": "Programma",
   "theme": {
     "light": "macOS Classic Dark2",
-    "dark": "Tokyo Night"
+    "dark": "macOS Classic Dark2"
   },
 
   // -------- Vim Mode --------
-  "vim_mode": true,
+  "vim_mode": false,
   "vim": {
     "use_smartcase_find": true,
     "use_system_clipboard": "on_yank"
@@ -116,8 +116,8 @@
     "button": false,
     "always_allow_tool_actions": true,
     "default_model": {
-      "provider": "copilot_chat",
-      "model": "gpt-4.1"
+      "provider": "x_ai",
+      "model": "grok-code-fast-1"
     }
   },
   "lsp": {
