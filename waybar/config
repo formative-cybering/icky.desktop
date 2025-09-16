@@ -6,6 +6,8 @@
   "margin-top": -20,
   "modules-left": [
     "wireplumber",
+    "battery",
+    "network"
   ],
   "modules-center": [
     "hyprland/workspaces"
@@ -14,10 +16,14 @@
     "temperature",
     "cpu",
     "custom/gpu-usage",
-    "clock"
+    "clock",
+    "clock#riga"
   ],
   "exclusive": false,
   "mode": "dock",
+  "battery": {
+    "format": "Battery {capacity}"
+  },
   "wlr/workspaces": {
     "format": "{icon}",
     "on-click": "activate",
@@ -33,19 +39,30 @@
     "tooltip": false
   },
   "wireplumber": {
-    "format": "{volume}",
-    "format-muted": "",
-    "on-click": "helvum",
+    "format": "Volume {volume}",
+    "format-muted": "x",
+    "on-click": "qpwgraph",
     "max-volume": 100,
     "scroll-step": 2,
     "tooltip": false
   },
-  "custom/gpu-usage": {
-    "exec": "nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits",
-    "format": "GPU {}",
-    "return-type": "",
-    "interval": 5,
-    "tooltip": false
+  "network": {
+    "interface": "wlan0",
+    "format": "{ifname}",
+    "format-wifi": "{essid} ({signalStrength})",
+    "format-ethernet": "{ipaddr}/{cidr} 󰊗",
+    "format-disconnected": "", //An empty format will hide the module.
+    "tooltip-format": "{ifname} via {gwaddr} 󰊗",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+    "tooltip-format-ethernet": "{ifname} ",
+    "tooltip-format-disconnected": "Disconnected",
+    "max-length": 50
+  },
+  "clock#riga": {
+    "timezone": "Europe/Riga",
+    "interval": 60,
+    "format": "{:%H:%M}",
+    "max-length": 25
   },
   "clock": {
     "timezone": "Australia/Sydney",
