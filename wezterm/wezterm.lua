@@ -9,16 +9,15 @@ local set_environment_variables = {
 -- This will hold the configuration.
 local config = wezterm.config_builder()
 
-
-config.font = wezterm.font 'Programma'
-config.font_dirs = {"/usr/share/fonts"}
+config.font = wezterm.font("Programma")
+config.font_dirs = { "/usr/share/fonts" }
 config.warn_about_missing_glyphs = false
 
 --config.front_end = "WebGpu"
 config.webgpu_power_preference = "HighPerformance"
 config.enable_wayland = true
-config.font_size = 18
-config.window_background_opacity = 0.9
+config.font_size = 15
+config.window_background_opacity = 0.7
 config.enable_tab_bar = false
 config.color_scheme = "Tomorrow Night Burns"
 
