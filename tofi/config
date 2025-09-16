@@ -7,6 +7,6 @@ padding-top = 25%
 result-spacing = 35
 num-results = 5
 font = "/usr/share/fonts/boxcutter.ttf"
-font-size = 90
+font-size = 45
 background-color = #000A
 selection-color = #ff0000
