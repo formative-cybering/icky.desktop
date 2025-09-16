@@ -20,6 +20,11 @@ vim.keymap.set(
 	'<esc>mz<bar>f"<bar>va"<bar>:w !sh ~/.config/tidal/tactus.sh<CR>',
 	{ desc = "Tidal Info" }
 )
+-- Move lines up/down in normal and visual modes
+vim.keymap.set("n", "K", ":m .-2<CR>", { noremap = true })
+vim.keymap.set("n", "J", ":m .+1<CR>", { noremap = true })
+vim.keymap.set("v", "K", ":m '<-2<CR>gv", { noremap = true })
+vim.keymap.set("v", "J", ":m '>+1<CR>gv", { noremap = true })
 
 -- [[ General Options ]]
 
@@ -33,12 +38,23 @@ vim.opt.background = "dark"
 vim.opt.guicursor =
 	"n-v-c-sm-i-ci-ve:block,r-cr-o:hor20,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,i-ci-ve:ver25"
 
+-- Enable syntax and filetype
+vim.opt.syntax = "on"
+
+-- Haskell-vim settings
+-- vim.g.haskell_classic_highlighting = 1
+-- vim.g.haskell_indent_if = 3
+-- vim.g.haskell_indent_case = 2
+-- vim.g.haskell_indent_let = 4
+-- vim.g.haskell_indent_where = 6
+
 -- Colorscheme & Highlights
 vim.cmd([[
   hi Normal guibg=NONE ctermbg=NONE
   hi StatusLine guibg=NONE ctermbg=NONE
   hi LineNr guibg=NONE ctermbg=NONE
   hi SignColumn guibg=NONE ctermbg=NONE
+  hi StatusLine guibg=NONE ctermbg=NONE
 ]])
 
 -- Indentation & Tabs
@@ -70,13 +86,6 @@ vim.opt.isfname:append("@-@")
 -- Performance
 vim.opt.updatetime = 50
 
--- [[ Filetype Detection ]]
-vim.filetype.add({
-	filename = {
-		[".tidal"] = "haskell",
-	},
-})
-
 -- [[ Packer Bootstrap ]]
 local ensure_packer = function()
 	local fn = vim.fn
@@ -94,44 +103,190 @@ local packer_bootstrap = ensure_packer()
 -- [[ Plugins ]]
 return require("packer").startup(function(use)
 	use("wbthomason/packer.nvim")
+
 	use({
-		"ficcdaf/ashen.nvim",
+		"nvim-treesitter/nvim-treesitter",
+		run = ":TSUpdate",
 		config = function()
-			require("ashen").setup({
-				-- your settings here, e.g.:
-				style_presets = { italic_comments = true },
-				transparent = true,
+			require("nvim-treesitter.configs").setup({
+				ensure_installed = { "haskell", "supercollider", "hyprlang" },
+				highlight = { enable = true },
 			})
-			vim.cmd("colorscheme ashen")
 		end,
 	})
-	use("andweeb/presence.nvim")
+
 	use({
-		"dcampos/nvim-snippy",
+		"thgrund/tidal.nvim",
 		config = function()
-			require("snippy").setup({
-				snippet_paths = { "~/.config/nvim/snippets" },
+			require("tidal").setup({
+				boot = {
+					tidal = {
+						--- Command to launch ghci with tidal installation
+						cmd = "ghci",
+						args = {
+							"-v0",
+						},
+						--- Tidal boot file path
+						file = "/home/slash/.config/tidal/bootTidal.hs",
+						enabled = true,
+						highlight = {
+							osc = {
+								ip = "127.0.0.1",
+								port = 6013,
+							},
+							fps = 30,
+						},
+						highlightStyle = {
+							osc = {
+								ip = "127.0.0.1",
+								port = 3335,
+							},
+						},
+					},
+					sclang = {
+						--- Command to launch SuperCollider
+						cmd = "sclang",
+						args = {},
+						--- SuperCollider boot file
+						file = vim.api.nvim_get_runtime_file("/home/slash/.config/SuperCollider/startup.scd", false)[1],
+						enabled = false,
+					},
+					split = "v",
+				},
+				--- Default keymaps
+				--- Set to false to disable all default mappings
+				--- @type table | nil
 				mappings = {
-					is = {
-						["<Tab>"] = "expand_or_advance",
-						["<S-Tab>"] = "previous",
-					},
-					nx = {
-						["<leader>x"] = "cut_text",
-					},
+					send_line = { mode = { "i", "n" }, key = "<leader>CR>" },
+					send_visual = { mode = { "x" }, key = "<S-CR>" },
+					send_block = { mode = { "i", "n", "x" }, key = "<S-CR>" },
+					send_node = { mode = "n", key = "<leader><n>" },
+					send_silence = { mode = "n", key = "<leader>d" },
+					send_hush = { mode = "n", key = "<leader><Esc>" },
+				},
+				---- Configure highlight applied to selections sent to tidal interpreter
+				selection_highlight = {
+					--- Highlight definition table
+					--- see ':h nvim_set_hl' for details
+					--- @type vim.api.keyset.highlight
+					highlight = { link = "IncSearch" },
+					--- Duration to apply the highlight for
+					timeout = 150,
 				},
 			})
 		end,
+		-- Configure treesitter to ensure parsers
+		require("nvim-treesitter.configs").setup({
+			ensure_installed = { "haskell", "supercollider" },
+			highlight = { enable = true },
+		}),
 	})
+
+	use({
+		"folke/which-key.nvim",
+		config = function()
+			require("which-key").setup()
+		end,
+	})
+
+	use("tpope/vim-repeat")
+
+	use({
+		"thgrund/tidal-makros.nvim",
+		config = function()
+			require("makros").setup()
+		end,
+	})
+
+	use({
+		"slugbyte/lackluster.nvim",
+		config = function()
+			require("lackluster").setup({
+				tweak_background = { normal = "none" },
+			})
+			vim.cmd([[colorscheme lackluster]])
+			vim.cmd([[hi StatusLine guibg=NONE ctermbg=NONE]])
+		end,
+	})
+	use({
+		"nvim-lualine/lualine.nvim",
+		config = function()
+			require("lualine").setup({
+				options = {
+					icons_enabled = false,
+					theme = "auto",
+					component_separators = { left = "", right = "" },
+					section_separators = { left = "", right = "" },
+					globalstatus = true,
+				},
+				sections = {
+					lualine_a = { "mode" },
+					lualine_b = { "branch" },
+					lualine_c = { { "filename", path = 1 } },
+					lualine_x = { "encoding", "fileformat", "filetype" },
+					lualine_y = { "progress" },
+					lualine_z = { "location" },
+				},
+			})
+			-- Force transparent background for lualine
+			vim.cmd([[
+      hi lualine_a_normal guibg=NONE ctermbg=NONE
+      hi lualine_b_normal guibg=NONE ctermbg=NONE
+      hi lualine_c_normal guibg=NONE ctermbg=NONE
+      hi lualine_x_normal guibg=NONE ctermbg=NONE
+      hi lualine_y_normal guibg=NONE ctermbg=NONE
+      hi lualine_z_normal guibg=NONE ctermbg=NONE
+      hi lualine_a_command guibg=NONE ctermbg=NONE
+      hi lualine_b_command guibg=NONE ctermbg=NONE
+      hi lualine_c_command guibg=NONE ctermbg=NONE
+      hi lualine_x_command guibg=NONE ctermbg=NONE
+      hi lualine_y_command guibg=NONE ctermbg=NONE
+      hi lualine_z_command guibg=NONE ctermbg=NONE
+      hi lualine_a_insert guibg=NONE ctermbg=NONE
+      hi lualine_b_insert guibg=NONE ctermbg=NONE
+      hi lualine_c_insert guibg=NONE ctermbg=NONE
+      hi lualine_x_insert guibg=NONE ctermbg=NONE
+      hi lualine_y_insert guibg=NONE ctermbg=NONE
+      hi lualine_z_insert guibg=NONE ctermbg=NONE
+    ]])
+		end,
+	})
+
+	-- use("neovimhaskell/haskell-vim")
+
+	use("andweeb/presence.nvim")
+
+	-- use({
+	-- 	"dcampos/nvim-snippy",
+	-- 	config = function()
+	-- 		require("snippy").setup({
+	-- 			snippet_paths = { "~/.config/nvim/snippets" },
+	-- 			mappings = {
+	-- 				is = {
+	-- 					["<Tab>"] = "expand_or_advance",
+	-- 					["<S-Tab>"] = "previous",
+	-- 				},
+	-- 				nx = {
+	-- 					["<leader>x"] = "cut_text",
+	-- 				},
+	-- 			},
+	-- 		})
+	-- 	end,
+	-- })
+
 	use("mbbill/undotree")
+
 	-- use("nvim-lua/plenary.nvim")
+
 	use({
 		"sphamba/smear-cursor.nvim",
 		config = function()
 			require("smear_cursor").enabled = true
 		end,
 	})
+
 	use("tpope/vim-commentary")
+
 	use("tpope/vim-fugitive")
 
 	use({
@@ -151,6 +306,7 @@ return require("packer").startup(function(use)
 			require("lspconfig").denols.setup({})
 		end,
 	})
+
 	use({
 		"stevearc/conform.nvim",
 		config = function()
@@ -170,19 +326,11 @@ return require("packer").startup(function(use)
 	})
 
 	use({
-		"nvim-treesitter/nvim-treesitter",
-		run = ":TSUpdate",
+		"daliusd/incr.nvim",
 		config = function()
-			require("nvim-treesitter.configs").setup({
-				incremental_selection = {
-					enable = true,
-					keymaps = {
-						init_selection = "v",
-						node_incremental = "v",
-						scope_incremental = "V",
-						node_decremental = "<BS>",
-					},
-				},
+			require("incr").setup({
+				incr_key = "<Tab>", -- Increment selection
+				decr_key = "<S-Tab>", -- Decrement selection
 			})
 		end,
 	})
