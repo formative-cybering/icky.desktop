@@ -58,6 +58,7 @@ if gum confirm "👨‍🍳 Core?"; then
     hyprqt6engine
     gnome-themes-extra
     xdg-desktop-portal
+    xdg-desktop-portal-wlr
     gnome-keyring
     polkit-gnome
     file-roller
