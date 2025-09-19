@@ -60,6 +60,7 @@ if gum confirm "👨‍🍳 Core?"; then
     xdg-desktop-portal
     xdg-desktop-portal-wlr
     gnome-keyring
+    seahorse
     polkit-gnome
     file-roller
     nemo
