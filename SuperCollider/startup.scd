@@ -27,7 +27,7 @@ s.reboot {
 
         ~pitchNodes = ~pitchNodes ? IdentityDictionary.new;
 
-        ~dirt.soundLibrary.addSynth(\persistantPitch, (
+        ~dirt.soundLibrary.addSynth(\persistentPitch, (
             play: {
                 var out      = (~channel ? 0).asInteger;
                 var n        = ~n ? 0;
