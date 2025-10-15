@@ -17,7 +17,7 @@ let visualiserTarget = Target
       { oName = "visualiser"
       , oAddress = "0.0.0.0"
       , oPort = 1111
-      , oLatency = 0.19
+      , oLatency = 0.1
       , oSchedule = Live
       , oWindow = Nothing
       , oHandshake = False
@@ -32,12 +32,15 @@ let oscplayShape = OSC "/play" $ ArgList
       , ("channel", Just $ VI 1)
       , ("amp", Just $ VI 1)
       , ("inst", Just $ VS "unknown")
+      , ("portamento", Just $ VI 0)
+      , ("legato", Just $ VF 0)
+      , ("sec", Just $ VF 0)
+      , ("usec", Just $ VF 0)
       , ("cps", Just $ VF 0)
       , ("cycle", Just $ VF 0)
       , ("delta", Just $ VF 0)
-      , ("portamento", Just $ VI 0)
-      , ("rate", Just $ VF 0)
-      , ("legato", Just $ VF 0)
+      , ("scene", Just $ VS "unknown")
+      , ("flash", Just $ VI 0)
       ]
 :}
 
@@ -56,10 +59,11 @@ instance Tidally where tidal = tidalInst
 -- Custom helpers (rename drum/drumN to myDrum/myDrumN as before)
 :{
 let inst = pS "inst"
+    scene = pS "scene"
     o pitch = n pitch # s "pitch"
     octave octave = stepsPerOctave octave
     volt volt = n volt # s "voltage"
-    g gate = n gate # s "gate" # legato 0.1 # amp 0.4
+    g gate = n gate # s "gate" # legato 0.3 # amp 0.6
     clock = rate "[1 0]*2" # s "voltage"
     ad w x = attack w # decay x # s "ar"
     adsr w x y z = attack w # decay x # sustain y # release z # s "ar"
@@ -77,6 +81,16 @@ let inst = pS "inst"
     j6 x = jumpMod 6 x
     j7 x = jumpMod 7 x
     j8 x = jumpMod 8 x
+    c1 x = clutchIn 1 x
+    c2 x = clutchIn 2 x
+    c3 x = clutchIn 3 x
+    c4 x = clutchIn 4 x
+    c5 x = clutchIn 5 x
+    c6 x = clutchIn 6 x
+    c7 x = clutchIn 7 x
+    c8 x = clutchIn 8 x
+    gtfo = degradeBy 1
+    deg x = degradeBy x
     b b = cps (270 / 60 / b)
 
     arrange :: [(Time, Pattern a)] -> Pattern a
