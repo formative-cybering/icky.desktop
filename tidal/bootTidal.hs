@@ -15,9 +15,9 @@ let _ = hSetEncoding stdout utf8
 :{
 let visualiserTarget = Target
       { oName = "visualiser"
-      , oAddress = "0.0.0.0"
-      , oPort = 1111
-      , oLatency = 0.1
+      , oAddress = "127.0.0.1"
+      , oPort = 1111 
+      , oLatency = 0
       , oSchedule = Live
       , oWindow = Nothing
       , oHandshake = False
@@ -26,27 +26,17 @@ let visualiserTarget = Target
 :}
 
 :{
-let oscplayShape = OSC "/play" $ ArgList
-      [ ("n", Just $ VI 0)
-      , ("s", Nothing)
-      , ("channel", Just $ VI 1)
-      , ("amp", Just $ VI 1)
-      , ("inst", Just $ VS "unknown")
-      , ("portamento", Just $ VI 0)
-      , ("legato", Just $ VF 0)
-      , ("sec", Just $ VF 0)
-      , ("usec", Just $ VF 0)
-      , ("cps", Just $ VF 0)
-      , ("cycle", Just $ VF 0)
-      , ("delta", Just $ VF 0)
-      , ("scene", Just $ VS "unknown")
-      , ("flash", Just $ VI 0)
+let visualiserShape = OSC "/visualiser" $ ArgList
+      [ ("z", Nothing)
+      , ("zx", Just $ VF 0)  
+      , ("zy", Just $ VF 0) 
+      , ("zz", Just $ VF 0) 
       ]
 :}
 
 :{
 let myOscMap =
-      [ (visualiserTarget, [oscplayShape])
+      [ (visualiserTarget, [visualiserShape])
       , (superdirtTarget, [superdirtShape])
       ]
 :}
@@ -54,13 +44,13 @@ let myOscMap =
 tidalInst <- mkTidalWith myOscMap defaultConfig
 instance Tidally where tidal = tidalInst
 
-instance Tidally where tidal = tidalInst
-
 -- Custom helpers (rename drum/drumN to myDrum/myDrumN as before)
 :{
-let inst = pS "inst"
-    scene = pS "scene"
-    o pitch = n pitch # s "pitch"
+let z = pS "z"
+    zx = pF "zx"
+    zy = pF "zy"
+    zz = pF "zz"
+    o pitch = n pitch # s "pitch" # legato 1
     octave octave = stepsPerOctave octave
     volt volt = n volt # s "voltage"
     g gate = n gate # s "gate" # legato 0.3 # amp 0.6
@@ -138,7 +128,7 @@ let inst = pS "inst"
     myDrumN "j" = 13
     myDrumN "p" = 15
     myDrumN "t" = 20
-    drm2 x = myDrum x # s "drm" # amp 1 # nudge 0.042 # inst "drum"
+    drm2 x = myDrum x # s "drm" # amp 1 # nudge 0.042  
 
     lxrd :: Pattern String -> ControlPattern
     lxrd = channel . (subtract 1 . lxrdChannel <$>)
@@ -151,7 +141,7 @@ let inst = pS "inst"
     lxrdChannel "h" = 14
     lxrdChannel "l" = 10
     lxrdChannel "m" = 11
-    lxr2 x = lxrd x # g 1 # l 0.1 # amp 0.1 # inst "drum"
+    lxr2 x = lxrd x # g 1 # l 0.1 # amp 0.1 
 
     accent = g 1 # x 16 # legato 1 # cut 69
 

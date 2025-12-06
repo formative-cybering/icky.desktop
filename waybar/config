@@ -16,8 +16,7 @@
     "temperature",
     "cpu",
     "custom/gpu-usage",
-    "clock",
-    "clock#riga"
+    "clock"
   ],
   "exclusive": false,
   "mode": "dock",
@@ -57,12 +56,6 @@
     "tooltip-format-ethernet": "{ifname} ",
     "tooltip-format-disconnected": "Disconnected",
     "max-length": 50
-  },
-  "clock#riga": {
-    "timezone": "Europe/Riga",
-    "interval": 60,
-    "format": "{:%H:%M}",
-    "max-length": 25
   },
   "clock": {
     "timezone": "Australia/Sydney",

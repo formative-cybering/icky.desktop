@@ -30,7 +30,6 @@ if gum confirm "👨‍🍳 Core?"; then
     hyprpaper
     hyprlock
     hypridle
-    rose-pine-hyprcursor
 
     tofi
     dunst
@@ -41,13 +40,12 @@ if gum confirm "👨‍🍳 Core?"; then
 
     nvim
     helix
-    wezterm-git
+    foot
     kitty
-    nnn
     zed
     fzf
 
-    zen-browser-bin
+    brave-bin
     chromium
 
     ffmpeg

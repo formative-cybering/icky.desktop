@@ -3,28 +3,30 @@
 -- [[ Keymaps ]]
 vim.keymap.set({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
 vim.keymap.set(
-	{ "x", "n", "s" },
-	"<C-e>",
-	"<esc>mz<bar>vip<bar>:w !sh /home/slash/.config/tidal/send_tidal.sh<CR>`z",
-	{ desc = "Tidal wave", silent = true, noremap = true }
+  { "x", "n", "s" },
+  "<C-e>",
+  "<esc>mz<bar>vip<bar>:w !sh /home/slash/.config/tidal/send_tidal.sh<CR>`z",
+  { desc = "Tidal wave", silent = true, noremap = true }
 )
 vim.keymap.set(
-	{ "i" },
-	"<C-e>",
-	"<esc>mz<bar>vip<bar>:w !sh /home/slash/.config/tidal/send_tidal.sh<CR>`zli",
-	{ desc = "Tidal wave", silent = true, noremap = true }
+  { "i" },
+  "<C-e>",
+  "<esc>mz<bar>vip<bar>:w !sh /home/slash/.config/tidal/send_tidal.sh<CR>`zli",
+  { desc = "Tidal wave", silent = true, noremap = true }
 )
 vim.keymap.set(
-	{ "i", "x", "n", "s" },
-	"<C-t>",
-	'<esc>mz<bar>f"<bar>va"<bar>:w !sh ~/.config/tidal/tactus.sh<CR>',
-	{ desc = "Tidal Info" }
+  { "i", "x", "n", "s" },
+  "<C-t>",
+  '<esc>mz<bar>f"<bar>va"<bar>:w !sh ~/.config/tidal/tactus.sh<CR>',
+  { desc = "Tidal Info" }
 )
 -- Move lines up/down in normal and visual modes
 vim.keymap.set("n", "K", ":m .-2<CR>", { noremap = true })
 vim.keymap.set("n", "J", ":m .+1<CR>", { noremap = true })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv", { noremap = true })
 vim.keymap.set("v", "J", ":m '>+1<CR>gv", { noremap = true })
+vim.keymap.set("v", "<C-c>", "y", { desc = "Copy to clipboard" })
+vim.keymap.set("i", "<C-v>", "<C-r>+", { desc = "Paste from clipboard" })
 
 -- [[ General Options ]]
 
@@ -36,7 +38,7 @@ vim.opt.scrolloff = 8
 vim.opt.termguicolors = true
 vim.opt.background = "dark"
 vim.opt.guicursor =
-	"n-v-c-sm-i-ci-ve:block,r-cr-o:hor20,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,i-ci-ve:ver25"
+"n-v-c-sm-i-ci-ve:block,r-cr-o:hor20,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,i-ci-ve:ver25"
 
 -- Enable syntax and filetype
 vim.opt.syntax = "on"
@@ -88,148 +90,157 @@ vim.opt.updatetime = 50
 
 -- [[ Packer Bootstrap ]]
 local ensure_packer = function()
-	local fn = vim.fn
-	local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-	if fn.empty(fn.glob(install_path)) > 0 then
-		fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
-		vim.cmd([[packadd packer.nvim]])
-		return true
-	end
-	return false
+  local fn = vim.fn
+  local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+  if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
+    vim.cmd([[packadd packer.nvim]])
+    return true
+  end
+  return false
 end
 
 local packer_bootstrap = ensure_packer()
 
 -- [[ Plugins ]]
 return require("packer").startup(function(use)
-	use("wbthomason/packer.nvim")
+  use("wbthomason/packer.nvim")
 
-	use({
-		"nvim-treesitter/nvim-treesitter",
-		run = ":TSUpdate",
-		config = function()
-			require("nvim-treesitter.configs").setup({
-				ensure_installed = { "haskell", "supercollider", "hyprlang" },
-				highlight = { enable = true },
-			})
-		end,
-	})
+  use({
+    "nvim-treesitter/nvim-treesitter",
+    run = ":TSUpdate",
+    config = function()
+      require("nvim-treesitter.configs").setup({
+        ensure_installed = { "haskell", "supercollider", "hyprlang" },
+        highlight = { enable = true },
+      })
+    end,
+  })
 
-	use({
-		"thgrund/tidal.nvim",
-		config = function()
-			require("tidal").setup({
-				boot = {
-					tidal = {
-						--- Command to launch ghci with tidal installation
-						cmd = "ghci",
-						args = {
-							"-v0",
-						},
-						--- Tidal boot file path
-						file = "/home/slash/.config/tidal/bootTidal.hs",
-						enabled = true,
-						highlight = {
-							osc = {
-								ip = "127.0.0.1",
-								port = 6013,
-							},
-							fps = 30,
-						},
-						highlightStyle = {
-							osc = {
-								ip = "127.0.0.1",
-								port = 3335,
-							},
-						},
-					},
-					sclang = {
-						--- Command to launch SuperCollider
-						cmd = "sclang",
-						args = {},
-						--- SuperCollider boot file
-						file = vim.api.nvim_get_runtime_file("/home/slash/.config/SuperCollider/startup.scd", false)[1],
-						enabled = false,
-					},
-					split = "v",
-				},
-				--- Default keymaps
-				--- Set to false to disable all default mappings
-				--- @type table | nil
-				mappings = {
-					send_line = { mode = { "i", "n" }, key = "<leader>CR>" },
-					send_visual = { mode = { "x" }, key = "<S-CR>" },
-					send_block = { mode = { "i", "n", "x" }, key = "<S-CR>" },
-					send_node = { mode = "n", key = "<leader><n>" },
-					send_silence = { mode = "n", key = "<leader>d" },
-					send_hush = { mode = "n", key = "<leader><Esc>" },
-				},
-				---- Configure highlight applied to selections sent to tidal interpreter
-				selection_highlight = {
-					--- Highlight definition table
-					--- see ':h nvim_set_hl' for details
-					--- @type vim.api.keyset.highlight
-					highlight = { link = "IncSearch" },
-					--- Duration to apply the highlight for
-					timeout = 150,
-				},
-			})
-		end,
-		-- Configure treesitter to ensure parsers
-		require("nvim-treesitter.configs").setup({
-			ensure_installed = { "haskell", "supercollider" },
-			highlight = { enable = true },
-		}),
-	})
+  use({
+    "thgrund/tidal.nvim",
+    config = function()
+      require("tidal").setup({
+        boot = {
+          tidal = {
+            --- Command to launch ghci with tidal installation
+            cmd = "ghci",
+            args = {
+              "-v0",
+            },
+            --- Tidal boot file path
+            file = "/home/slash/.config/tidal/bootTidal.hs",
+            enabled = true,
+            highlight = {
+              autostart = true,
+              styles = {
+                osc = {
+                  ip = "127.0.0.1",
+                  port = 3335,
+                },
+                -- [Tidal ID] -> hl style
+                custom = {},
+                global = {
+                  baseName = "CodeHighlight",
+                  style = { bg = "#ff0000", foreground = "#000000" },
+                },
+              },
+              events = {
+                osc = {
+                  ip = "127.0.0.1",
+                  port = 6013,
+                },
+              },
+              fps = 120,
+            },
+          },
+          sclang = {
+            --- Command to launch SuperCollider
+            cmd = "sclang",
+            args = {},
+            --- SuperCollider boot file
+            file = vim.api.nvim_get_runtime_file("bootfiles/BootSuperDirt.scd", false)[1],
+            enabled = false,
+          },
+          split = "v",
+        },
+        --- Default keymaps
+        --- Set to false to disable all default mappings
+        --- @type table | nil
+        mappings = {
+          send_line = { mode = { "i", "n" }, key = "<S-CR>" },
+          send_visual = { mode = { "x" }, key = "<S-CR>" },
+          send_block = { mode = { "i", "n", "x" }, key = "<M-CR>" },
+          send_node = { mode = "n", key = "<leader><CR>" },
+          send_silence = { mode = "n", key = "<leader>d" },
+          send_hush = { mode = "n", key = "<leader><Esc>" },
+        },
+        ---- Configure highlight applied to selections sent to tidal interpreter
+        selection_highlight = {
+          --- Highlight definition table
+          --- see ':h nvim_set_hl' for details
+          --- @type vim.api.keyset.highlight
+          highlight = { link = "IncSearch" },
+          --- Duration to apply the highlight for
+          timeout = 150,
+        },
+      })
+    end,
+    -- Configure treesitter to ensure parsers
+    require("nvim-treesitter.configs").setup({
+      ensure_installed = { "haskell", "supercollider" },
+      highlight = { enable = true },
+    }),
+  })
 
-	use({
-		"folke/which-key.nvim",
-		config = function()
-			require("which-key").setup()
-		end,
-	})
+  use({
+    "folke/which-key.nvim",
+    config = function()
+      require("which-key").setup()
+    end,
+  })
 
-	use("tpope/vim-repeat")
+  use("tpope/vim-repeat")
 
-	use({
-		"thgrund/tidal-makros.nvim",
-		config = function()
-			require("makros").setup()
-		end,
-	})
+  use({
+    "thgrund/tidal-makros.nvim",
+    config = function()
+      require("makros").setup()
+    end,
+  })
 
-	use({
-		"slugbyte/lackluster.nvim",
-		config = function()
-			require("lackluster").setup({
-				tweak_background = { normal = "none" },
-			})
-			vim.cmd([[colorscheme lackluster]])
-			vim.cmd([[hi StatusLine guibg=NONE ctermbg=NONE]])
-		end,
-	})
-	use({
-		"nvim-lualine/lualine.nvim",
-		config = function()
-			require("lualine").setup({
-				options = {
-					icons_enabled = false,
-					theme = "auto",
-					component_separators = { left = "", right = "" },
-					section_separators = { left = "", right = "" },
-					globalstatus = true,
-				},
-				sections = {
-					lualine_a = { "mode" },
-					lualine_b = { "branch" },
-					lualine_c = { { "filename", path = 1 } },
-					lualine_x = { "encoding", "fileformat", "filetype" },
-					lualine_y = { "progress" },
-					lualine_z = { "location" },
-				},
-			})
-			-- Force transparent background for lualine
-			vim.cmd([[
+  use({
+    "slugbyte/lackluster.nvim",
+    config = function()
+      require("lackluster").setup({
+        tweak_background = { normal = "none" },
+      })
+      vim.cmd([[colorscheme lackluster]])
+      vim.cmd([[hi StatusLine guibg=NONE ctermbg=NONE]])
+    end,
+  })
+  use({
+    "nvim-lualine/lualine.nvim",
+    config = function()
+      require("lualine").setup({
+        options = {
+          icons_enabled = false,
+          theme = "auto",
+          component_separators = { left = "", right = "" },
+          section_separators = { left = "", right = "" },
+          globalstatus = true,
+        },
+        sections = {
+          lualine_a = { "mode" },
+          lualine_b = { "branch" },
+          lualine_c = { { "filename", path = 1 } },
+          lualine_x = { "encoding", "fileformat", "filetype" },
+          lualine_y = { "progress" },
+          lualine_z = { "location" },
+        },
+      })
+      -- Force transparent background for lualine
+      vim.cmd([[
       hi lualine_a_normal guibg=NONE ctermbg=NONE
       hi lualine_b_normal guibg=NONE ctermbg=NONE
       hi lualine_c_normal guibg=NONE ctermbg=NONE
@@ -249,103 +260,96 @@ return require("packer").startup(function(use)
       hi lualine_y_insert guibg=NONE ctermbg=NONE
       hi lualine_z_insert guibg=NONE ctermbg=NONE
     ]])
-		end,
-	})
+    end,
+  })
 
-	-- use("neovimhaskell/haskell-vim")
+  -- use("neovimhaskell/haskell-vim")
 
-	use("andweeb/presence.nvim")
+  use("andweeb/presence.nvim")
 
-	-- use({
-	-- 	"dcampos/nvim-snippy",
-	-- 	config = function()
-	-- 		require("snippy").setup({
-	-- 			snippet_paths = { "~/.config/nvim/snippets" },
-	-- 			mappings = {
-	-- 				is = {
-	-- 					["<Tab>"] = "expand_or_advance",
-	-- 					["<S-Tab>"] = "previous",
-	-- 				},
-	-- 				nx = {
-	-- 					["<leader>x"] = "cut_text",
-	-- 				},
-	-- 			},
-	-- 		})
-	-- 	end,
-	-- })
+  -- use({
+  -- 	"dcampos/nvim-snippy",
+  -- 	config = function()
+  -- 		require("snippy").setup({
+  -- 			snippet_paths = { "~/.config/nvim/snippets" },
+  -- 			mappings = {
+  -- 				is = {
+  -- 					["<Tab>"] = "expand_or_advance",
+  -- 					["<S-Tab>"] = "previous",
+  -- 				},
+  -- 				nx = {
+  -- 					["<leader>x"] = "cut_text",
+  -- 				},
+  -- 			},
+  -- 		})
+  -- 	end,
+  -- })
 
-	use("mbbill/undotree")
+  use("mbbill/undotree")
 
-	-- use("nvim-lua/plenary.nvim")
+  -- use("nvim-lua/plenary.nvim")
 
-	use({
-		"sphamba/smear-cursor.nvim",
-		config = function()
-			require("smear_cursor").enabled = true
-		end,
-	})
+  use({
+    "sphamba/smear-cursor.nvim",
+    config = function()
+      require("smear_cursor").enabled = true
+    end,
+  })
 
-	use("tpope/vim-commentary")
+  use("tpope/vim-commentary")
 
-	use("tpope/vim-fugitive")
+  use("tpope/vim-fugitive")
 
-	use({
-		"junegunn/fzf.vim",
-		requires = { "junegunn/fzf", run = ":call fzf#install()" },
-		config = function()
-			vim.api.nvim_create_user_command("FF", "Files", {})
-			vim.api.nvim_create_user_command("FB", "Buffers", {})
-			vim.api.nvim_create_user_command("FL", "Lines", {})
-			vim.api.nvim_create_user_command("FR", "Rg", {})
-		end,
-	})
+  use({
+    "junegunn/fzf.vim",
+    requires = { "junegunn/fzf", run = ":call fzf#install()" },
+    config = function()
+      vim.api.nvim_create_user_command("FF", "Files", {})
+      vim.api.nvim_create_user_command("FB", "Buffers", {})
+      vim.api.nvim_create_user_command("FL", "Lines", {})
+      vim.api.nvim_create_user_command("FR", "Rg", {})
+    end,
+  })
 
-	use({
-		"neovim/nvim-lspconfig",
-		config = function()
-			require("lspconfig").denols.setup({})
-		end,
-	})
+  use({
+    "stevearc/conform.nvim",
+    config = function()
+      require("conform").setup({
+        formatters_by_ft = {
+          lua = { "stylua" },
+          go = { "gofmt" },
+          haskell = { "fourmolu" },
+          javascript = { "deno_fmt" },
+        },
+        format_on_save = {
+          timeout_ms = 500,
+          lsp_format = "fallback",
+        },
+      })
+    end,
+  })
 
-	use({
-		"stevearc/conform.nvim",
-		config = function()
-			require("conform").setup({
-				formatters_by_ft = {
-					lua = { "stylua" },
-					go = { "gofmt" },
-					haskell = { "fourmolu" },
-					javascript = { "deno_fmt" },
-				},
-				format_on_save = {
-					timeout_ms = 500,
-					lsp_format = "fallback",
-				},
-			})
-		end,
-	})
+  use({
+    "daliusd/incr.nvim",
+    config = function()
+      require("incr").setup({
+        incr_key = "<Tab>",   -- Increment selection
+        decr_key = "<S-Tab>", -- Decrement selection
+      })
+    end,
+  })
 
-	use({
-		"daliusd/incr.nvim",
-		config = function()
-			require("incr").setup({
-				incr_key = "<Tab>", -- Increment selection
-				decr_key = "<S-Tab>", -- Decrement selection
-			})
-		end,
-	})
+  use({
+    "folke/trouble.nvim",
+    requires = "nvim-tree/nvim-web-devicons",
+    config = function()
+      require("trouble").setup({
+        -- your configuration comes here
+      })
+    end,
+  })
 
-	use({
-		"folke/trouble.nvim",
-		requires = "nvim-tree/nvim-web-devicons",
-		config = function()
-			require("trouble").setup({
-				-- your configuration comes here
-			})
-		end,
-	})
-
-	if packer_bootstrap then
-		require("packer").sync()
-	end
+  if packer_bootstrap then
+    require("packer").sync()
+  end
 end)

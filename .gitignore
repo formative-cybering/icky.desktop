@@ -8,6 +8,7 @@
 !dunst/**
 !fonts/
 !fonts/**
+!foot/**
 !hypr/
 !hypr/**
 !install
@@ -15,10 +16,8 @@
 !nvim/
 !nvim/**
 nvim/plugin/*_compiled.lua
-!omarchy/
-!omarchy/**
 !SuperCollider/
-!SuperCollider/**
+!SuperCollider/*
 !systemd/
 !systemd/**
 systemd/user/timers.target.wants
@@ -27,8 +26,6 @@ systemd/user/graphical-session.target.wants
 !tidal/**
 !tofi/
 !tofi/**
-!wallpapers/
-!wallpapers/**
 !waybar/
 !waybar/**
 !wezterm/
@@ -36,5 +33,3 @@ systemd/user/graphical-session.target.wants
 !zed/
 !zed/**
 zed/.*
-!zen-browser/
-!zen-browser/**

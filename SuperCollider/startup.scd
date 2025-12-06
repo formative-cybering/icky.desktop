@@ -13,6 +13,9 @@ s.reboot {
         // 16 channel output
         ~dirt = SuperDirt(16, s);
 
+        // Cut groups for pitch cutting
+        ~cutGroups = IdentityDictionary.new;
+
         // MIDI instruments
         MIDIClient.init;
         ~midiOut = MIDIOut.newByName("UM-ONE", "UM-ONE MIDI 1");
@@ -25,44 +28,53 @@ s.reboot {
          // SuperDirt Voltage
         ("/home/slash/.config/SuperCollider/superdirt-voltage.scd").load;
 
-        ~pitchNodes = ~pitchNodes ? IdentityDictionary.new;
+        // new pitch synth
+        // set your channels for pitch synths here
+        ~pitchChannels = [1, 2];
 
-        ~dirt.soundLibrary.addSynth(\persistentPitch, (
-            play: {
-                var out      = (~channel ? 0).asInteger;
-                var n        = ~n ? 0;
-                var port     = ~portamento ? 0.05;
-                var steps    = ~stepsPerOctave ? 12;
-                var offset   = ~offsetVolts ? 0;
-                var curve    = ~curve ? 0;
+        SynthDef(\persistentPitch, {
+          | out,
+          channel = 0,
+          freq = 220,
+          portamento = 0 |
+          var n = Lag.ar(log2(K2A.ar(freq)/440), portamento);
+          var sig = LinLin.ar(n, -1, 9, 0, 1);
+          OffsetOut.ar(channel, [sig]);
+        }).add;
 
-                if (~pitchNodes[out].isNil or: { ~pitchNodes[out].isRunning.not }) {
-                    ~pitchNodes[out] = Synth(\pitch, [
-                        \out, out,
-                        \n, n,
-                        \stepsPerOctave, steps,
-                        \offsetVolts, offset,
-                        \portamento, port,
-                        \curve, curve
-                    ]);
-                } {
-                    s.sendBundle(s.latency, {
-                        ~pitchNodes[out].set(
-                            \n, n,
-                            \stepsPerOctave, steps,
-                            \offsetVolts, offset,
-                            \portamento, port,
-                            \curve, curve
-                        );
-                    });
-                };
-            }
-        ));
+       ~cv_ndefs = ~pitchChannels.collect { |i|
+           var channel = ~pitchChannels[i];
+           var name = (\cv_np ++ channel).asSymbol;
+           Ndef(name).source = \persistentPitch;
+           Ndef(name).set(\channel, channel);
+           Ndef(name);
+       };
+
+       ~pitchChannels.do { |i|
+            var channel = ~pitchChannels[i];
+            var name = (\p ++ channel).asSymbol;
+            var cv = (\cv_np ++ channel).asSymbol;
+           ~dirt.soundLibrary.addSynth((name).asSymbol, (play: {
+               var latency = (~latency ? 0);
+               var freq = ~freq;
+               var portamento = ~portamento;
+               var ndef = Ndef(cv).wakeUp;
+               ndef.wakeUp;
+               // schedule the cycles, prevents delayed signals
+               thisThread.clock.sched(latency - 0.025, {
+                   ndef.set(\portamento, portamento);
+                   ndef.set(\channel, channel);
+                   ndef.set(\freq, freq);
+               });
+           }));
+       };
 
         s.sync;
+
         ~dirt.start(57120, [0,2,4,6,8,10,12,14]);
+
     };
 
-    s.latency = 1.5;
+    s.latency = 0.1;
 };
 )
