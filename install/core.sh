@@ -102,4 +102,17 @@ if gum confirm "👨‍🍳 More?"; then
   yay -S --needed --noconfirm "${extra_packages[@]}"
 fi
 
+
+
+if gum confirm "🖱️ Plan 9 cursors?"; then
+  tmp_dir="$(mktemp -d)"
+  git clone https://github.com/luka-hash/plan9cursors.git "$tmp_dir/plan9cursors"
+
+  sudo cp -r "$tmp_dir/plan9cursors/plan9cursors" "/usr/share/icons"
+
+  gsettings set org.gnome.desktop.interface cursor-theme 'plan9cursors'
+
+  rm -rf "$tmp_dir"
+fi
+
 echo "💦 Done"
